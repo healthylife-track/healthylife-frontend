@@ -5,9 +5,13 @@ const GlobalStyles = createGlobalStyle`
 
     :root {
       --color-black: 0, 0, 0;
-      --color-primary: 84, 109, 211;
+      --color-primary: 29, 68, 255;
+      --color-secondary-o: 255, 92, 0; 
+      --color-secondary-b: 99, 99, 99;
       --color-white: 255, 255, 255;
       --color-error: 255, 0, 0;
+      --box-shadow: 0px 3px 6px #d6d6d6;
+
   }
 
   *, *::after, *::before {
@@ -20,9 +24,10 @@ const GlobalStyles = createGlobalStyle`
   }
 
   body {
-    color: rgb(var(--color-black));
+    color: rgb(var(--color-secondary-b));
     background: rgb(var(--color-white));
     font-size: ${getRemValue(15)};
+    font-weight: 400;
     line-height: 1.5;
   }
 
