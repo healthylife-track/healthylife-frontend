@@ -1,4 +1,4 @@
-# Driver's Log Frontend
+# Health Track Frontend
 
 The package manager used in this project is yarn and as such you would need to have yarn installed on your machine.
 
