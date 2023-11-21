@@ -1,13 +1,17 @@
 import Image from 'next/image';
-import { LogoContainer } from './logo.styles';
+import { ILogoStyleProps, LogoContainer } from './logo.styles';
 import getRemValue from '@/utils/getRemValue';
 import routes from '@/lib/routes';
 
-const Logo = () => {
+interface ILogoProps extends ILogoStyleProps {
+  secondary?: boolean;
+}
+
+const Logo = ({ secondary, isLarger }: ILogoProps) => {
   return (
-    <LogoContainer href={routes.home()}>
+    <LogoContainer href={routes.home()} isLarger={isLarger}>
       <Image
-        src="/assets/logo.png"
+        src={secondary ? '/assets/logo-white.png' : '/assets/logo.png'}
         placeholder="blur"
         blurDataURL="data:/assets/blurred-image.png"
         priority
