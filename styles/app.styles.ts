@@ -57,6 +57,10 @@ const GlobalStyles = createGlobalStyle`
     opacity: 0.3;
   }
 
+  li {
+    list-style: none;
+  }
+
 
   `;
 
