@@ -1,5 +1,10 @@
+import { navItems } from '@/public/static-data/navItems';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import Button from '../button/button';
 import Logo from '../logo/logo';
+import SvgIcon from '../svg-icon/svg-icon';
 import {
   Headr,
   Nav,
@@ -8,11 +13,6 @@ import {
   NavMenuButton,
   NavSubContainer,
 } from './header.styles';
-import Link from 'next/link';
-import SvgIcon from '../svg-icon/svg-icon';
-import { navItems } from '@/public/static-data/navItems';
-import { useRouter } from 'next/router';
-import Button from '../button/button';
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
