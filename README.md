@@ -20,7 +20,7 @@ For first time users
 
 - Clone this repo onto your machine
 - Run `yarn install`
-- Run `yarn dec`
+- Run `yarn dev`
 - Go to [localhost:3000](http://localhost:3000) in your browser to see the app
 
 ## Contribution guide
