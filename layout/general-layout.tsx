@@ -19,7 +19,7 @@ const GeneralLayout = ({ pageTitle, children }: GeneralLayoutProps) => {
           content="Revolutionizing Medical Adherence with Digital Solutions!"
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/assets/pulse.svg" />
+        <link rel="icon" href="/assets/favicon.png" />
       </Head>
       <Header />
       <main>{children}</main>
