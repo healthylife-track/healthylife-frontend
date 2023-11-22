@@ -157,7 +157,7 @@ export const FaqContainer = styled.div`
   padding: 3rem ${getRemValue(20)};
   width: 100%;
   border-radius: 0.8rem;
-  margin: 2rem 0;
+  margin-bottom: 2rem;
   flex-basis: 55%;
 `;
 
