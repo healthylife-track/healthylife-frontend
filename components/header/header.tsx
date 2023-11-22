@@ -1,4 +1,4 @@
-import { navItems } from '@/public/static-data/navItems';
+import { navItems, navButtonLinks } from '@/public/static-data/navItems';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -51,18 +51,24 @@ const Header = () => {
           </NavItems>
 
           <NavItems hasMarginTop>
-            <NavItem>
-              <Button>
-                <p>Login</p>
-              </Button>
-            </NavItem>
+            {navButtonLinks.map(({ label, href }) => (
+              <NavItem key={label}>
+                <Button
+                  onClick={() => {
+                    router.push(href);
+                    setIsOpen(false);
+                  }}
+                  primary={label === 'Sign Up'}
+                >
+                  <p>{label}</p>
 
-            <NavItem>
-              <Button primary>
-                <p>Sign Up</p>
-                <SvgIcon name="arrow-right" />
-              </Button>
-            </NavItem>
+                  <ShowView when>
+                    <SvgIcon name="arrow-right" />
+                  </ShowView>
+                </Button>
+              </NavItem>
+            ))}
+            <NavItem></NavItem>
           </NavItems>
         </NavSubContainer>
         <NavMenuButton onClick={() => setIsOpen(!isOpen)}>

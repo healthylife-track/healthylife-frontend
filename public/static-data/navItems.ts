@@ -14,3 +14,14 @@ export const navItems = [
     href: '#',
   },
 ];
+
+export const navButtonLinks = [
+  {
+    label: 'Login',
+    href: routes.login(),
+  },
+  {
+    label: 'Sign Up',
+    href: routes.signUp(),
+  },
+];
