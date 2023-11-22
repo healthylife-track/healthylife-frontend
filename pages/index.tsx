@@ -7,6 +7,8 @@ import {
   HowItWorksContainer,
   HowItWorksImageContainer,
   HowItWorksSubContainer,
+  ServiceSectionImageContainer,
+  ServicesSection,
 } from '@/styles/home.styles';
 import Button from '@/components/button/button';
 import SvgIcon from '@/components/svg-icon/svg-icon';
@@ -48,13 +50,20 @@ const Home: NextPageWithLayout = () => {
           </div>
         </HeroTextContainer>
         <HeroImageContainer>
-          <Image src="/assets/hero-image.png" alt="hero image" fill />
+          <Image
+            src="/assets/hero-image.png"
+            alt="hero image"
+            placeholder="blur"
+            blurDataURL="data:/assets/blurred-image.png"
+            sizes="(min-width: 56.25em) 45vw, 90vw"
+            fill
+          />
         </HeroImageContainer>
       </HeroWrapper>
 
       {/* How it works section  */}
       <HowItWorksContainer>
-        <SectionHeaderText>How It Works</SectionHeaderText>
+        <SectionHeaderText isCentered>How It Works</SectionHeaderText>
         <p>Easy steps to set reminders.</p>
         <HowItWorksSubContainer>
           <HowItWorksImageContainer></HowItWorksImageContainer>
@@ -80,6 +89,33 @@ const Home: NextPageWithLayout = () => {
           />
         </HowItWorksSubContainer>
       </HowItWorksContainer>
+
+      {/* Our Services Section */}
+      <ServicesSection isReversed>
+        <div>
+          <SectionHeaderText isPrimary>
+            Your Health, Our Priority
+          </SectionHeaderText>
+
+          <p>
+            We provide you with highly skilled and compassionate doctors to help
+            you keep track of your exceptional medical care. Your health journey
+            is important to us, and our doctors are committed to guiding you
+            every step of your way.
+          </p>
+        </div>
+
+        <ServiceSectionImageContainer>
+          <Image
+            src="/assets/standing-male-doctor.png"
+            alt="standing-male-doctor"
+            placeholder="blur"
+            blurDataURL="data:/assets/blurred-image.png"
+            sizes="(min-width: 56.25em) 45vw, 90vw"
+            fill
+          />
+        </ServiceSectionImageContainer>
+      </ServicesSection>
     </>
   );
 };

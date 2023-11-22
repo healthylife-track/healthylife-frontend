@@ -1,7 +1,11 @@
 import getRemValue from '@/utils/getRemValue';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-export const HeroWrapper = styled.section`
+interface IHomePageStyleProps {
+  isReversed?: boolean;
+}
+
+const sectionsWithImageStyle = css<IHomePageStyleProps>`
   padding: 3rem ${getRemValue(24)};
 
   @media screen and (min-width: 56.25em) {
@@ -11,10 +15,29 @@ export const HeroWrapper = styled.section`
     max-width: var(--max-width);
     margin: 0 auto;
 
+    ${({ isReversed }) =>
+      isReversed &&
+      `
+    flex-direction: row-reverse;
+  `}
+
     & > div {
       flex-basis: 48%;
     }
   }
+`;
+
+const sectionImageContainerStyle = css`
+  aspect-ratio: 1;
+  position: relative;
+
+  & > img {
+    object-fit: contain;
+  }
+`;
+
+export const HeroWrapper = styled.section<IHomePageStyleProps>`
+  ${sectionsWithImageStyle};
 `;
 
 export const HeroTextContainer = styled.div`
@@ -51,12 +74,7 @@ export const HeroTextContainer = styled.div`
 `;
 
 export const HeroImageContainer = styled.div`
-  aspect-ratio: 1;
-  position: relative;
-
-  & > img {
-    object-fit: contain;
-  }
+  ${sectionImageContainerStyle}
 `;
 
 export const HowItWorksContainer = styled.section`
@@ -95,4 +113,18 @@ export const HowItWorksImageContainer = styled.div`
     left: 50%;
     transform: translateX(-50%);
   }
+`;
+
+export const ServicesSection = styled.section<IHomePageStyleProps>`
+  ${sectionsWithImageStyle}
+  padding: 2rem;
+  font-weight: 600;
+`;
+
+export const ServiceSectionImageContainer = styled.div`
+  ${sectionImageContainerStyle}
+`;
+
+export const ServicesSectionTextContainer = styled.div`
+  padding: 1rem;
 `;
