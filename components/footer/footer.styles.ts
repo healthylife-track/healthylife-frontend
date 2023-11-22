@@ -3,11 +3,14 @@ import styled from 'styled-components';
 
 export const FooterWrapper = styled.footer`
   background-color: rgb(var(--color-primary));
-  padding: 2rem 1rem;
+  padding: 2rem ${getRemValue(24)};
   color: rgb(var(--color-white));
   font-weight: 600;
 
   & > div {
+    max-width: var(--max-width);
+    margin: 0 auto;
+
     @media screen and (min-width: 56.25em) {
       display: flex;
       gap: 7rem;
