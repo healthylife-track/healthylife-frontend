@@ -44,6 +44,7 @@ export const HeroTextContainer = styled.div`
   & > h1 {
     font-size: ${getRemValue(30)};
     margin-bottom: 1rem;
+    color: rgb(var(--color-black));
 
     & > span {
       color: rgb(var(--color-secondary-o));
