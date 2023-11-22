@@ -44,6 +44,7 @@ export const HeroTextContainer = styled.div`
   & > h1 {
     font-size: ${getRemValue(30)};
     margin-bottom: 1rem;
+    color: rgb(var(--color-black));
 
     & > span {
       color: rgb(var(--color-secondary-o));
@@ -156,7 +157,7 @@ export const FaqContainer = styled.div`
   padding: 3rem ${getRemValue(20)};
   width: 100%;
   border-radius: 0.8rem;
-  margin: 2rem 0;
+  margin-bottom: 2rem;
   flex-basis: 55%;
 `;
 
@@ -172,6 +173,7 @@ export const FaqDetails = styled.details`
     list-style-type: none;
     position: relative;
     padding-right: 1rem;
+    color: rgb(var(--color-black));
 
     &::-webkit-details-marker,
     &::marker {

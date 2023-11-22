@@ -12,6 +12,7 @@ export const SectionHeaderText = styled.p<ICommonStyleProps>`
   position: relative;
   margin-bottom: ${getRemValue(18)};
   width: max-content;
+  color: rgb(var(--color-black));
 
   ${({ isCentered }) =>
     isCentered &&
