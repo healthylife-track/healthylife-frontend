@@ -1,5 +1,9 @@
+import FormInputContainer from '@/components/form-input-container/form-input-container';
+import ShowView from '@/components/show-view/show-view';
+import SvgIcon from '@/components/svg-icon/svg-icon';
 import GeneralLayout from '@/layout/general-layout';
-import { NextPageWithLayout } from './_app';
+import routes from '@/lib/routes';
+import userTypes from '@/public/static-data/auth-page-data.json';
 import {
   AuthCheckboxContainer,
   AuthContainer,
@@ -12,15 +16,11 @@ import {
   UserSelectContainer,
   UserSelectWrapper,
 } from '@/styles/auth.styles';
-import FormInputContainer from '@/components/form-input-container/form-input-container';
-import isEmail from 'validator/lib/isEmail';
-import { useForm } from 'react-hook-form';
-import SvgIcon from '@/components/svg-icon/svg-icon';
-import userTypes from '@/public/static-data/auth-page-data.json';
-import { useState } from 'react';
-import ShowView from '@/components/show-view/show-view';
 import Link from 'next/link';
-import routes from '@/lib/routes';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import isEmail from 'validator/lib/isEmail';
+import { NextPageWithLayout } from './_app';
 
 const Login: NextPageWithLayout = () => {
   const [userType, setUserType] = useState('');
@@ -87,7 +87,9 @@ const Login: NextPageWithLayout = () => {
             </AuthCheckboxContainer>
 
             <FormButton>
-              <p>Login</p>
+              <p>
+                Login as <span>{userType}</span>
+              </p>
               <SvgIcon name="arrow-right" />
             </FormButton>
           </AuthFormContainer>
