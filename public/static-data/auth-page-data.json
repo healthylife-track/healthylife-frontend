@@ -1,0 +1,10 @@
+[
+  {
+    "icon": "patients",
+    "type": "patient"
+  },
+  {
+    "icon": "doctor",
+    "type": "doctor"
+  }
+]

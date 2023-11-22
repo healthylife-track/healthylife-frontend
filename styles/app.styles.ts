@@ -14,6 +14,7 @@ const GlobalStyles = createGlobalStyle`
       --color-error: 255, 0, 0;
       --box-shadow: 0px 3px 6px rgb(var(--color-secondary-gr));
       --max-width: ${getRemValue(1400)};
+      --box-shadow: 0px 21px 45px rgba(var(--color-black), 0.1);
   }
 
   *, *::after, *::before {
