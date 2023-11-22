@@ -1,3 +1,4 @@
+import Footer from '@/components/footer/footer';
 import Header from '@/components/header/header';
 import Head from 'next/head';
 import { ReactNode } from 'react';
@@ -22,6 +23,7 @@ const GeneralLayout = ({ pageTitle, children }: GeneralLayoutProps) => {
       </Head>
       <Header />
       <main>{children}</main>
+      <Footer />
     </>
   );
 };
