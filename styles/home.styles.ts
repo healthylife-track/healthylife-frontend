@@ -173,6 +173,7 @@ export const FaqDetails = styled.details`
     list-style-type: none;
     position: relative;
     padding-right: 1rem;
+    color: rgb(var(--color-black));
 
     &::-webkit-details-marker,
     &::marker {
