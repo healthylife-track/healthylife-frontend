@@ -53,7 +53,7 @@ export const NavSubContainer = styled.div<IHeaderStyleProps>`
     transition-duration: 0.2s;
     transition-timing-function: ease-in-out;
     border-top-right-radius: ${getRemValue(100)};
-    z-index: 1;
+    z-index: 5;
     border-bottom-right-radius: ${getRemValue(100)};
     box-shadow: 2px -2px 5px #d6d6d6;
 
@@ -63,6 +63,21 @@ export const NavSubContainer = styled.div<IHeaderStyleProps>`
       visibility: visible;
       transform: translateX(0);
   `}
+  }
+`;
+
+export const OverlayContainer = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(var(--color-white), 0.01);
+  backdrop-filter: blur(10px);
+  z-index: -1;
+
+  @media screen and (min-width: 56.25em) {
+    display: none;
   }
 `;
 
