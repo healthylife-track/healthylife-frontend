@@ -12,7 +12,7 @@ export const ContactPageWrapper = styled.div`
 
 export const ContactPageSubContainer = styled.div`
   display: flex;
-  gap: ${getRemValue(24)};
+  gap: 2rem;
   flex-wrap: wrap;
   justify-content: center;
   margin-top: 1rem;

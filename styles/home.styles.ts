@@ -97,7 +97,7 @@ export const HowItWorksSubContainer = styled.div`
 
   @media screen and (min-width: 43.75em) {
     justify-content: center;
-    gap: ${getRemValue(10)};
+    gap: 2rem;
   }
 `;
 
