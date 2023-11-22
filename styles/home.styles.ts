@@ -101,21 +101,27 @@ export const HowItWorksSubContainer = styled.div`
 `;
 
 export const HowItWorksImageContainer = styled.div`
+  border-radius: ${getRemValue(20)};
+  width: 95%;
+  aspect-ratio: 3/0.5;
+  left: 50%;
+  transform: translateX(-50%);
+  overflow: hidden;
   position: absolute;
+  top: 0;
+  z-index: -1;
 
-  @media screen and (min-width: 56.25em) {
+  & > img {
+    object-fit: fill;
     border-radius: ${getRemValue(20)};
-    width: 95%;
-    aspect-ratio: 3/0.5;
-    z-index: -1;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    overflow: hidden;
+  }
 
-    & > img {
-      object-fit: cover;
-    }
+  @media screen and (max-width: 43.75rem) {
+    aspect-ratio: 1/3;
+    width: 60%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-80%, -50%);
   }
 `;
 
