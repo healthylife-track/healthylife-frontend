@@ -14,7 +14,6 @@ const Logo = ({ secondary, isLarger }: ILogoProps) => {
         src={secondary ? '/assets/logo-white.png' : '/assets/logo.png'}
         placeholder="blur"
         blurDataURL="data:/assets/blurred-image.png"
-        priority
         sizes={`${getRemValue(150)}`}
         alt="assignment-help-logo"
         fill
