@@ -93,11 +93,12 @@ export const HowItWorksSubContainer = styled.div`
   margin: 2rem auto;
   padding: 2rem;
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
 
   @media screen and (min-width: 43.75em) {
     justify-content: center;
-    gap: ${getRemValue(10)};
+    gap: 2rem;
   }
 `;
 

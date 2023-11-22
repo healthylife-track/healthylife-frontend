@@ -21,6 +21,20 @@ const Header = () => {
 
   const router = useRouter();
 
+  const handleClose = () => {
+    setIsOpen(false);
+  };
+
+  useEffect(() => {
+    router.events.on('routeChangeComplete', handleClose);
+    router.events.on('routeChangeError', handleClose);
+
+    return () => {
+      router.events.off('routeChangeComplete', handleClose);
+      router.events.off('routeChangeError', handleClose);
+    };
+  }, [router, handleClose]);
+
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -55,8 +69,7 @@ const Header = () => {
               <NavItem key={label}>
                 <Button
                   onClick={() => {
-                    router.prefetch(href);
-                    setIsOpen(false);
+                    router.push(href);
                   }}
                   primary={label === 'Sign Up'}
                 >

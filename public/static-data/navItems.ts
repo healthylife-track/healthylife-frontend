@@ -11,7 +11,7 @@ export const navItems = [
   },
   {
     label: 'Contact',
-    href: '#',
+    href: routes.contact(),
   },
 ];
 
