@@ -11,6 +11,7 @@ const GlobalStyles = createGlobalStyle`
       --color-white: 255, 255, 255;
       --color-error: 255, 0, 0;
       --box-shadow: 0px 3px 6px #d6d6d6;
+      --max-width: ${getRemValue(1400)};
 
   }
 

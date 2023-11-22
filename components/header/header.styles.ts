@@ -15,16 +15,18 @@ export const Headr = styled.header`
   left: 0;
   z-index: 3;
   background-color: rgb(var(--color-white));
-  padding: 1rem;
+  padding: 1rem ${getRemValue(24)};
 
   @media screen and (min-width: 56.25em) {
-    padding: 0 1rem;
+    padding: 0 ${getRemValue(24)};
   }
 `;
 
 export const Nav = styled.nav`
   display: flex;
   justify-content: space-between;
+  max-width: var(--max-width);
+  margin: 0 auto;
   align-items: center;
   gap: 2rem;
 `;

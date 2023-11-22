@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 export interface IButtonStyleProps {
   primary?: boolean;
+  block?: boolean;
 }
 
 export const Btn = styled.button<IButtonStyleProps>`
@@ -12,6 +13,7 @@ export const Btn = styled.button<IButtonStyleProps>`
   border: 1px solid rgb(var(--color-primary));
   border-radius: ${getRemValue(20)};
   font-weight: 700;
+  justify-content: center;
 
   & > svg {
     width: ${getRemValue(20)};
@@ -27,5 +29,11 @@ export const Btn = styled.button<IButtonStyleProps>`
       & > svg {
       fill: currentColor;
    }
+   `}
+
+  ${({ block }) =>
+    block &&
+    `
+      width: 100%;
    `}
 `;
