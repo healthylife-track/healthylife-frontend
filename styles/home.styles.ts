@@ -2,7 +2,7 @@ import getRemValue from '@/utils/getRemValue';
 import styled from 'styled-components';
 
 export const HeroWrapper = styled.section`
-  padding: 2rem ${getRemValue(24)};
+  padding: 3rem ${getRemValue(24)};
 
   @media screen and (min-width: 56.25em) {
     display: flex;
