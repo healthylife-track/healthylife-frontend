@@ -12,7 +12,9 @@ import {
   NavItems,
   NavMenuButton,
   NavSubContainer,
+  OverlayContainer,
 } from './header.styles';
+import ShowView from '../show-view/show-view';
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -30,6 +32,14 @@ const Header = () => {
     <Headr>
       <Nav>
         <Logo />
+
+        <ShowView when={isOpen}>
+          <OverlayContainer
+            onClick={() => {
+              isOpen && setIsOpen(false);
+            }}
+          />
+        </ShowView>
 
         <NavSubContainer isOpen={isOpen}>
           <NavItems>
