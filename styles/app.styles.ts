@@ -8,11 +8,12 @@ const GlobalStyles = createGlobalStyle`
       --color-primary: 29, 68, 255;
       --color-secondary-o: 255, 92, 0; 
       --color-secondary-b: 99, 99, 99;
+      --color-secondary-gr: 214, 214, 214;
+      --color-tertiary: 0, 177, 48;
       --color-white: 255, 255, 255;
       --color-error: 255, 0, 0;
-      --box-shadow: 0px 3px 6px #d6d6d6;
+      --box-shadow: 0px 3px 6px rgb(var(--color-secondary-gr));
       --max-width: ${getRemValue(1400)};
-
   }
 
   *, *::after, *::before {
