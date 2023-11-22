@@ -1,11 +1,8 @@
 import SvgIcon from '@/components/svg-icon/svg-icon';
-import {
-  CardIconContainer,
-  HowItWorksCardContainer,
-  IHowItWorksCardStyleProps,
-} from './how-it-works-card.styles';
+import { HowItWorksCardContainer } from './how-it-works-card.styles';
+import { CardIconContainer, ICommonStyleProps } from '@/styles/common.styles';
 
-interface IHowItWorksCardProps extends IHowItWorksCardStyleProps {
+interface IHowItWorksCardProps extends ICommonStyleProps {
   icon: string;
   title: string;
   description: string;
