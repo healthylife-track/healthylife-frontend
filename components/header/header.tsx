@@ -21,6 +21,20 @@ const Header = () => {
 
   const router = useRouter();
 
+  const handleClose = () => {
+    setIsOpen(false);
+  };
+
+  useEffect(() => {
+    router.events.on('routeChangeComplete', handleClose);
+    router.events.on('routeChangeError', handleClose);
+
+    return () => {
+      router.events.off('routeChangeComplete', handleClose);
+      router.events.off('routeChangeError', handleClose);
+    };
+  }, [router, handleClose]);
+
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -56,7 +70,6 @@ const Header = () => {
                 <Button
                   onClick={() => {
                     router.push(href);
-                    setIsOpen(false);
                   }}
                   primary={label === 'Sign Up'}
                 >
