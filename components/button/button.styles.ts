@@ -8,16 +8,17 @@ export interface IButtonStyleProps {
 
 export const Btn = styled.button<IButtonStyleProps>`
   display: flex;
-  gap: 1rem;
-  padding: ${getRemValue(10)} 2rem;
+  gap: ${getRemValue(10)};
+  padding: ${getRemValue(10)} 1rem;
   border: 1px solid rgb(var(--color-primary));
   border-radius: ${getRemValue(20)};
   font-weight: 700;
   justify-content: center;
+  align-items: center;
 
   & > svg {
-    width: ${getRemValue(20)};
-    height: ${getRemValue(20)};
+    width: ${getRemValue(15)};
+    height: ${getRemValue(15)};
   }
 
   ${({ primary }) =>

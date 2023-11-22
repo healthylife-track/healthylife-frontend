@@ -62,7 +62,7 @@ const Header = () => {
                 >
                   <p>{label}</p>
 
-                  <ShowView when>
+                  <ShowView when={label === 'Sign Up'}>
                     <SvgIcon name="arrow-right" />
                   </ShowView>
                 </Button>
