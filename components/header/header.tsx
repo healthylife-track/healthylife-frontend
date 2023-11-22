@@ -55,7 +55,7 @@ const Header = () => {
               <NavItem key={label}>
                 <Button
                   onClick={() => {
-                    router.prefetch(href);
+                    router.push(href);
                     setIsOpen(false);
                   }}
                   primary={label === 'Sign Up'}
