@@ -104,7 +104,6 @@ export const HowItWorksImageContainer = styled.div`
   position: absolute;
 
   @media screen and (min-width: 56.25em) {
-    background-color: rgb(var(--color-primary));
     border-radius: ${getRemValue(20)};
     width: 95%;
     aspect-ratio: 3/0.5;
@@ -112,6 +111,11 @@ export const HowItWorksImageContainer = styled.div`
     top: 0;
     left: 50%;
     transform: translateX(-50%);
+    overflow: hidden;
+
+    & > img {
+      object-fit: cover;
+    }
   }
 `;
 
@@ -126,5 +130,12 @@ export const ServiceSectionImageContainer = styled.div`
 `;
 
 export const ServicesSectionTextContainer = styled.div`
-  padding: 1rem;
+  padding: 0 1rem;
+
+  & > button {
+    color: rgb(var(--color-secondary-o));
+    font-weight: 700;
+    font-size: ${getRemValue(18)};
+    margin-top: 2rem;
+  }
 `;

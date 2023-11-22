@@ -9,6 +9,7 @@ import {
   HowItWorksSubContainer,
   ServiceSectionImageContainer,
   ServicesSection,
+  ServicesSectionTextContainer,
 } from '@/styles/home.styles';
 import Button from '@/components/button/button';
 import SvgIcon from '@/components/svg-icon/svg-icon';
@@ -66,7 +67,16 @@ const Home: NextPageWithLayout = () => {
         <SectionHeaderText isCentered>How It Works</SectionHeaderText>
         <p>Easy steps to set reminders.</p>
         <HowItWorksSubContainer>
-          <HowItWorksImageContainer></HowItWorksImageContainer>
+          <HowItWorksImageContainer>
+            <Image
+              src="/assets/overlay-image.png"
+              alt="overlay image"
+              placeholder="blur"
+              blurDataURL="data:/assets/blurred-image.png"
+              sizes="90vw"
+              fill
+            />
+          </HowItWorksImageContainer>
           <HowItWorksCard
             icon="add-user"
             title="Set Up Your Account"
@@ -92,7 +102,7 @@ const Home: NextPageWithLayout = () => {
 
       {/* Our Services Section */}
       <ServicesSection isReversed>
-        <div>
+        <ServicesSectionTextContainer>
           <SectionHeaderText isPrimary>
             Your Health, Our Priority
           </SectionHeaderText>
@@ -103,7 +113,9 @@ const Home: NextPageWithLayout = () => {
             is important to us, and our doctors are committed to guiding you
             every step of your way.
           </p>
-        </div>
+
+          <button>Learn More...</button>
+        </ServicesSectionTextContainer>
 
         <ServiceSectionImageContainer>
           <Image
