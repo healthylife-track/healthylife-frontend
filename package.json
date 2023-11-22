@@ -10,10 +10,13 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@types/validator": "^13.11.7",
     "next": "14.0.3",
     "react": "^18",
     "react-dom": "^18",
-    "styled-components": "^6.1.1"
+    "react-hook-form": "^7.48.2",
+    "styled-components": "^6.1.1",
+    "validator": "^13.11.0"
   },
   "devDependencies": {
     "@types/node": "^20",
