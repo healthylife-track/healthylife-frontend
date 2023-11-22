@@ -4,16 +4,22 @@ import {
   HeroImageContainer,
   HeroTextContainer,
   HeroWrapper,
+  HowItWorksContainer,
+  HowItWorksImageContainer,
+  HowItWorksSubContainer,
 } from '@/styles/home.styles';
 import Button from '@/components/button/button';
 import SvgIcon from '@/components/svg-icon/svg-icon';
 import Link from 'next/link';
 import routes from '@/lib/routes';
 import Image from 'next/image';
+import HowItWorksCard from '@/components/cards/how-it-works-card/how-it-works-card';
+import { SectionHeaderText } from '@/styles/common.styles';
 
 const Home: NextPageWithLayout = () => {
   return (
     <>
+      {/* Hero Section */}
       <HeroWrapper>
         <HeroTextContainer>
           <h1>
@@ -45,6 +51,35 @@ const Home: NextPageWithLayout = () => {
           <Image src="/assets/hero-image.png" alt="hero image" fill />
         </HeroImageContainer>
       </HeroWrapper>
+
+      {/* How it works section  */}
+      <HowItWorksContainer>
+        <SectionHeaderText>How It Works</SectionHeaderText>
+        <p>Easy steps to set reminders.</p>
+        <HowItWorksSubContainer>
+          <HowItWorksImageContainer></HowItWorksImageContainer>
+          <HowItWorksCard
+            icon="add-user"
+            title="Set Up Your Account"
+            description="Sign up and get started on your health journey today."
+            buttonText="Get Started"
+          />
+          <HowItWorksCard
+            isPrimary
+            icon="done-ring"
+            title="Enter Medication Details"
+            description="Enter Medication details and take control of your health."
+            buttonText="Enter Details"
+          />
+          <HowItWorksCard
+            isTertiary
+            icon="notification-bell"
+            title="Get Reminders"
+            description="Get daily reminders and track your medical adherence."
+            buttonText="Set Reminders"
+          />
+        </HowItWorksSubContainer>
+      </HowItWorksContainer>
     </>
   );
 };

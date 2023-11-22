@@ -58,3 +58,41 @@ export const HeroImageContainer = styled.div`
     object-fit: contain;
   }
 `;
+
+export const HowItWorksContainer = styled.section`
+  padding: 1rem ${getRemValue(24)};
+
+  & > p {
+    text-align: center;
+    font-weight: 600;
+  }
+`;
+
+export const HowItWorksSubContainer = styled.div`
+  max-width: var(--max-width);
+  position: relative;
+  margin: 2rem auto;
+  padding: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+
+  @media screen and (min-width: 43.75em) {
+    justify-content: center;
+    gap: ${getRemValue(10)};
+  }
+`;
+
+export const HowItWorksImageContainer = styled.div`
+  position: absolute;
+
+  @media screen and (min-width: 56.25em) {
+    background-color: rgb(var(--color-primary));
+    border-radius: ${getRemValue(20)};
+    width: 95%;
+    aspect-ratio: 3/0.5;
+    z-index: -1;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+`;
