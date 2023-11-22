@@ -55,14 +55,14 @@ const Header = () => {
               <NavItem key={label}>
                 <Button
                   onClick={() => {
-                    router.push(href);
+                    router.prefetch(href);
                     setIsOpen(false);
                   }}
                   primary={label === 'Sign Up'}
                 >
                   <p>{label}</p>
 
-                  <ShowView when>
+                  <ShowView when={label === 'Sign Up'}>
                     <SvgIcon name="arrow-right" />
                   </ShowView>
                 </Button>

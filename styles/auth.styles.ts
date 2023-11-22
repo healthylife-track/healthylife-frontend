@@ -34,12 +34,17 @@ export const FormButton = styled.button`
   background-color: rgb(var(--color-primary));
   color: rgb(var(--color-white));
   margin-top: ${getRemValue(30)};
+  margin-bottom: 1rem;
   font-weight: 600;
   font-size: ${getRemValue(20)};
   display: flex;
   align-items: center;
   justify-content: center;
   gap: ${getRemValue(10)};
+
+  & > p > span {
+    text-transform: capitalize;
+  }
 
   & > svg {
     width: ${getRemValue(20)};
