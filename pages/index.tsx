@@ -1,6 +1,13 @@
+import Button from '@/components/button/button';
+import HowItWorksCard from '@/components/cards/how-it-works-card/how-it-works-card';
+import SvgIcon from '@/components/svg-icon/svg-icon';
 import GeneralLayout from '@/layout/general-layout';
-import { NextPageWithLayout } from './_app';
+import routes from '@/lib/routes';
+import { SectionHeaderText } from '@/styles/common.styles';
 import {
+  FaqContainer,
+  FaqDetails,
+  FaqWrapper,
   HeroImageContainer,
   HeroTextContainer,
   HeroWrapper,
@@ -11,13 +18,10 @@ import {
   ServicesSection,
   ServicesSectionTextContainer,
 } from '@/styles/home.styles';
-import Button from '@/components/button/button';
-import SvgIcon from '@/components/svg-icon/svg-icon';
-import Link from 'next/link';
-import routes from '@/lib/routes';
 import Image from 'next/image';
-import HowItWorksCard from '@/components/cards/how-it-works-card/how-it-works-card';
-import { SectionHeaderText } from '@/styles/common.styles';
+import Link from 'next/link';
+import { NextPageWithLayout } from './_app';
+import faqs from '@/public/static-data/faq.json';
 
 const Home: NextPageWithLayout = () => {
   return (
@@ -128,6 +132,24 @@ const Home: NextPageWithLayout = () => {
           />
         </ServiceSectionImageContainer>
       </ServicesSection>
+
+      {/* FAQ Section */}
+      <FaqWrapper>
+        <SectionHeaderText isCentered>
+          Frequently Asked Questions
+        </SectionHeaderText>
+
+        <FaqContainer>
+          {faqs.map(({ question, answer }) => (
+            <FaqDetails key={question}>
+              <summary>
+                <p>{question}</p>
+              </summary>
+              <p>{answer}</p>
+            </FaqDetails>
+          ))}
+        </FaqContainer>
+      </FaqWrapper>
     </>
   );
 };

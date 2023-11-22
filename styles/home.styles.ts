@@ -145,3 +145,58 @@ export const ServicesSectionTextContainer = styled.div`
     margin-top: 2rem;
   }
 `;
+
+export const FaqWrapper = styled.section`
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 1rem ${getRemValue(24)};
+`;
+
+export const FaqContainer = styled.div`
+  padding: 3rem ${getRemValue(20)};
+  width: 100%;
+  border-radius: 0.8rem;
+  margin: 2rem 0;
+  flex-basis: 55%;
+`;
+
+export const FaqDetails = styled.details`
+  padding-top: 1rem;
+  transition: 0.5s ease-in-out;
+  border-bottom: 1px solid rgb(var(--color-secondary-gr), 0.5);
+
+  & > summary {
+    font-weight: 600;
+    cursor: pointer;
+    font-size: ${getRemValue(20)};
+    list-style-type: none;
+    position: relative;
+    padding-right: 1rem;
+
+    &::-webkit-details-marker,
+    &::marker {
+      display: none;
+    }
+
+    &::after {
+      content: url(/assets/arrow-down.svg);
+      position: absolute;
+      top: 0.3rem;
+      right: -0.5rem;
+    }
+
+    @media screen and (min-width: 56.25em) {
+      font-size: ${getRemValue(30)};
+    }
+  }
+
+  &[open] > summary {
+    &::after {
+      content: url(/assets/arrow-up.svg);
+    }
+  }
+
+  & > p {
+    margin-top: 1rem;
+  }
+`;
