@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 export const AboutPageWrapper = styled.div`
   padding: 3rem 0;
 
-  & > * {
+  & > section {
     padding: 2rem ${getRemValue(24)};
   }
 `;
@@ -87,7 +87,7 @@ export const SolutionSectionImageContainer = styled.div`
     background-size: cover;
     position: absolute;
     bottom: ${getRemValue(-20)};
-    left: ${getRemValue(-60)};
+    left: ${getRemValue(-40)};
     transform: rotate(-20deg);
     z-index: 0;
   }
