@@ -55,6 +55,7 @@ const FormInputContainer: FC<IFormInputProps> = ({
             />
             <TogglePasswordBtn
               type="button"
+              tabIndex={-1}
               onClick={() => setShowPassword(!showPassword)}
             >
               <SvgIcon name={!showPassword ? 'eye-open' : 'eye-close'} />

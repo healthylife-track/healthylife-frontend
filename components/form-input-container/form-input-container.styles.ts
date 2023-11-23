@@ -78,7 +78,8 @@ export const TogglePasswordBtn = styled.button`
 
 export const InputFooterText = styled.small`
   position: relative;
+  font-size: ${getRemValue(10)};
   color: red;
   left: 5px;
-  top: -14px;
+  top: ${getRemValue(-14)};
 `;

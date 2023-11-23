@@ -16,15 +16,48 @@ import {
 } from '@/styles/auth.styles';
 import Link from 'next/link';
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import isEmail from 'validator/lib/isEmail';
 import isMobilePhone from 'validator/lib/isMobilePhone';
+import isAlpha from 'validator/lib/isAlpha';
 import { NextPageWithLayout } from './_app';
+import { ISignUpSchema } from '@/types/auth.type';
 
 const SignUp: NextPageWithLayout = () => {
   const [userType, setUserType] = useState('');
 
-  const { control, watch } = useForm();
+  const defaultValues: ISignUpSchema = {
+    email: '',
+    role: userType,
+    firstName: '',
+    lastName: '',
+    phoneNo: '',
+    bloodGroup: '',
+    genotype: '',
+    medicalCondition: '',
+    LicenseNo: '',
+    password: '',
+    confirmPassword: '',
+  };
+
+  const { handleSubmit, control, reset, watch } = useForm<ISignUpSchema>({
+    defaultValues,
+  });
+
+  const validLastName = (value: string) => {
+    return /^[A-Za-z]+(?:-[A-Za-z]+)?$/.test(value);
+  };
+
+  const onSubmit: SubmitHandler<ISignUpSchema> = async (data) => {
+    const payload: ISignUpSchema = {
+      ...data,
+      role: userType,
+    };
+    const jsonData = JSON.stringify(data);
+    console.log('SU Data:', jsonData);
+    console.log('da', payload);
+    reset();
+  };
 
   const watchedPassword = watch('password');
   return (
@@ -47,7 +80,47 @@ const SignUp: NextPageWithLayout = () => {
         </ShowView>
 
         <ShowView when={!!userType}>
-          <AuthFormContainer>
+          <AuthFormContainer onSubmit={handleSubmit(onSubmit)}>
+            <FormInputContainer
+              htmlFor="first-name"
+              label="First Name"
+              type="text"
+              id="first-name"
+              placeholder={`Enter your first name`}
+              controller={{
+                control,
+                name: 'firstName',
+                rules: {
+                  required: 'Please enter your first name',
+                  validate: {
+                    isValid: (value) =>
+                      isAlpha(value) ||
+                      'First name must consist of letters only, no special characters allowed.',
+                  },
+                },
+              }}
+            />
+
+            <FormInputContainer
+              htmlFor="last-name"
+              label="Last Name"
+              type="text"
+              id="last-name"
+              placeholder={`Enter your last name`}
+              controller={{
+                control,
+                name: 'lastName',
+                rules: {
+                  required: 'Please enter your last name',
+                  validate: {
+                    isValid: (value) =>
+                      validLastName(value) ||
+                      'Last name must consist of letters only, and may include a hyphen.',
+                  },
+                },
+              }}
+            />
+
             <FormInputContainer
               type="email"
               htmlFor="email"
@@ -69,38 +142,70 @@ const SignUp: NextPageWithLayout = () => {
 
             <FormInputContainer
               htmlFor="phone-number"
-              label="Company Phone No."
-              type="text"
+              label="Phone No."
+              type="tel"
               id="phone-number"
               placeholder={`Enter company email`}
               controller={{
                 control,
-                name: 'contactNo',
+                name: 'phoneNo',
                 rules: {
                   required: 'Please enter your phone number',
                   validate: {
                     isValid: (val) =>
                       isMobilePhone(val, 'any', { strictMode: true }) ||
-                      'Please enter a valid phone number',
+                      'Please enter phone number in international format e.g(+23481xxxxxxxx)',
                   },
                 },
               }}
             />
 
-            <FormInputContainer
-              type="bloodGroup"
-              htmlFor="blood-group"
-              placeholder="Enter email address"
-              label="Blood Group"
-              id="blood-group"
-              controller={{
-                control,
-                name: 'email',
-                rules: {
-                  required: `Please enter your blood group`,
-                },
-              }}
-            />
+            <ShowView when={userType === 'patient'}>
+              <FormInputContainer
+                type="text"
+                htmlFor="blood-group"
+                placeholder="Enter your blood group"
+                label="Blood Group"
+                id="blood-group"
+                controller={{
+                  control,
+                  name: 'bloodGroup',
+                  rules: {
+                    required: `Please enter your blood group`,
+                  },
+                }}
+              />
+
+              <FormInputContainer
+                type="text"
+                htmlFor="genotype"
+                placeholder="Enter your genotype"
+                label="Genotype"
+                id="genotype"
+                controller={{
+                  control,
+                  name: 'genotype',
+                  rules: {
+                    required: `Please enter your genotype`,
+                  },
+                }}
+              />
+
+              <FormInputContainer
+                type="text"
+                htmlFor="medical-condition"
+                placeholder="Enter your medical condition"
+                label="Medical Condition"
+                id="medical-condition"
+                controller={{
+                  control,
+                  name: 'medicalCondition',
+                  rules: {
+                    required: `Please enter your medical condition`,
+                  },
+                }}
+              />
+            </ShowView>
 
             <ShowView when={userType === 'doctor'}>
               <FormInputContainer
