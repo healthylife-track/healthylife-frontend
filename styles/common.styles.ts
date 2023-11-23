@@ -11,7 +11,7 @@ export interface ICommonStyleProps {
 }
 
 export const SectionHeaderText = styled.p<ICommonStyleProps>`
-  font-size: ${getRemValue(30)};
+  font-size: ${getRemValue(25)};
   font-weight: 700;
   position: relative;
   margin-bottom: ${getRemValue(18)};
@@ -32,7 +32,7 @@ export const SectionHeaderText = styled.p<ICommonStyleProps>`
     border-color: rgb(var(--color-secondary-o));
     border-style: solid;
     border-bottom: 4px;
-    width: 75%;
+    width: 70%;
     bottom: 0;
 
     ${({ isPrimary }) =>
@@ -43,11 +43,11 @@ export const SectionHeaderText = styled.p<ICommonStyleProps>`
   }
 
   @media screen and (min-width: 43.75em) {
-    font-size: ${getRemValue(35)};
+    font-size: ${getRemValue(25)};
   }
 
   @media screen and (min-width: 62.5em) {
-    font-size: ${getRemValue(40)};
+    font-size: ${getRemValue(35)};
   }
 `;
 

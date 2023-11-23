@@ -21,11 +21,11 @@ const Header = () => {
 
   const router = useRouter();
 
-  const handleClose = () => {
-    setIsOpen(false);
-  };
-
   useEffect(() => {
+    const handleClose = () => {
+      setIsOpen(false);
+    };
+
     router.events.on('routeChangeComplete', handleClose);
     router.events.on('routeChangeError', handleClose);
 
@@ -33,7 +33,7 @@ const Header = () => {
       router.events.off('routeChangeComplete', handleClose);
       router.events.off('routeChangeError', handleClose);
     };
-  }, [router, handleClose]);
+  }, [router]);
 
   useEffect(() => {
     if (isOpen) {

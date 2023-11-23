@@ -113,7 +113,22 @@ export const NavItem = styled.li<IHeaderStyleProps>`
   & > a {
     width: 100%;
     display: block;
-    color: #636363;
+    color: currentColor;
+    transition-property: transform, border, color;
+    transition-timing-function: ease-in-out;
+    transition-duration: 0.2s;
+
+    &:hover {
+      &::after {
+        border-bottom: 3px solid currentColor;
+        width: ${getRemValue(30)};
+        content: '';
+        display: block;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    }
   }
 
   & > button {
