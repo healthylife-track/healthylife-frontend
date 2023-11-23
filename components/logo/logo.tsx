@@ -15,7 +15,7 @@ const Logo = ({ secondary, isLarger }: ILogoProps) => {
         placeholder="blur"
         blurDataURL="data:/assets/blurred-image.png"
         sizes={`${getRemValue(150)}`}
-        alt="assignment-help-logo"
+        alt="med-aid-sync-logo"
         fill
       />
     </LogoContainer>
