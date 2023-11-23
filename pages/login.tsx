@@ -18,14 +18,39 @@ import {
 } from '@/styles/auth.styles';
 import Link from 'next/link';
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import isEmail from 'validator/lib/isEmail';
 import { NextPageWithLayout } from './_app';
+import { ISignInSchema } from '@/types/auth.type';
 
 const Login: NextPageWithLayout = () => {
   const [userType, setUserType] = useState('');
 
-  const { control } = useForm();
+  const defaultValues: ISignInSchema = {
+    email: '',
+    password: '',
+    role: '',
+  };
+
+  const { handleSubmit, control, reset } = useForm<ISignInSchema>({
+    defaultValues,
+  });
+
+  const onSubmit: SubmitHandler<ISignInSchema> = async (data) => {
+    const { email, password } = data;
+
+    const payload: ISignInSchema = {
+      email,
+      password,
+      role: userType,
+    };
+    const jsonData = JSON.stringify(payload);
+
+    console.log('Signed In:', jsonData);
+
+    reset();
+  };
+
   return (
     <AuthMainContainer>
       <AuthContainer>
@@ -46,7 +71,7 @@ const Login: NextPageWithLayout = () => {
         </ShowView>
 
         <ShowView when={!!userType}>
-          <AuthFormContainer>
+          <AuthFormContainer onSubmit={handleSubmit(onSubmit)}>
             <FormInputContainer
               type="email"
               htmlFor="email"
