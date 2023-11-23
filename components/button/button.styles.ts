@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 export interface IButtonStyleProps {
   primary?: boolean;
+  secondary?: boolean;
   block?: boolean;
 }
 
@@ -26,6 +27,18 @@ export const Btn = styled.button<IButtonStyleProps>`
     `
       color: rgb(var(--color-white));
       background-color: rgb(var(--color-primary));
+
+      & > svg {
+      fill: currentColor;
+   }
+   `}
+
+  ${({ secondary }) =>
+    secondary &&
+    `
+      color: rgb(var(--color-white));
+      background-color: rgb(var(--color-secondary-o));
+      border-color: rgb(var(--color-secondary-o));
 
       & > svg {
       fill: currentColor;
