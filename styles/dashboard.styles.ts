@@ -7,6 +7,8 @@ interface IDashboardStyleProps {
   zeroMargin?: boolean;
   isNotBold?: boolean;
   isMissed?: boolean;
+  isBigger?: boolean;
+  isOpen?: boolean;
 }
 
 export const DashboardNav = styled.nav`
@@ -32,19 +34,35 @@ export const LogoutButton = styled.div`
   display: flex;
   align-items: center;
   gap: ${getRemValue(10)};
+  margin: 2rem auto;
+  width: max-content;
 `;
 
-export const UserImageContainer = styled.div`
+export const UserImageContainer = styled.div<IDashboardStyleProps>`
   padding: 3px;
   border-radius: 50%;
   border: 1px solid rgb(var(--color-primary));
 
-  & > div {
-    width: ${getRemValue(40)};
-    height: ${getRemValue(40)};
-    border-radius: 50%;
-    position: relative;
+  ${({ isBigger }) =>
+    isBigger &&
+    `
+      border: none;
+      margin: 2rem auto;
+      position: relative;
+
+      & > div {
+         width: ${getRemValue(100)};
+         height: ${getRemValue(100)};
+      }
+   `}
   }
+  
+  & > div {
+     width: ${getRemValue(40)};
+     height: ${getRemValue(40)};
+     border-radius: 50%;
+     position: relative;
+     margin: 1rem auto;
 
   & > img {
     object-fit: contain;
@@ -61,21 +79,6 @@ const containerStyle = css`
 
   &:hover {
     box-shadow: var(--box-shadow);
-  }
-`;
-
-export const ProfileContainer = styled.aside`
-  ${containerStyle}
-  width: 100%;
-
-  /* remove this later  */
-  @media screen and (max-width: 56.25em) {
-    margin-top: 2rem;
-  }
-  /* remove this later  */
-
-  @media screen and (min-width: 56.25em) {
-    max-width: ${getRemValue(400)};
   }
 `;
 
@@ -315,4 +318,70 @@ export const MedicationStatus = styled.div<IDashboardStyleProps>`
     `
       color: rgb(var(--color-error));
    `}
+`;
+
+export const ProfileContainer = styled.aside<IDashboardStyleProps>`
+  ${containerStyle}
+  padding: 2rem;
+  width: 100%;
+  height: max-content;
+
+  @media screen and (max-width: 56.25em) {
+    position: fixed;
+    top: 0;
+    right: -100vw;
+    z-index: 2;
+    height: 100vh;
+    background-color: rgb(var(--color-white));
+    transition: right 0.2s ease-in-out;
+
+    ${({ isOpen }) =>
+      isOpen &&
+      `
+      right: 0;
+      
+   `}
+  }
+
+  @media screen and (min-width: 56.25em) {
+    max-width: ${getRemValue(400)};
+  }
+`;
+
+export const UserProfileWrapper = styled.div`
+  & > p {
+    text-align: center;
+  }
+
+  & > div {
+    margin-top: 3rem;
+  }
+`;
+
+export const UserDataWrapper = styled.div`
+  margin: 8px 0;
+`;
+
+export const MobileProfileButton = styled.button`
+  display: block;
+  width: ${getRemValue(35)};
+  height: ${getRemValue(35)};
+  position: absolute;
+  top: ${getRemValue(20)};
+  right: ${getRemValue(24)};
+
+  @media screen and (min-width: 56.25em) {
+    display: none;
+  }
+`;
+
+export const MobileCloseButton = styled.button`
+  position: absolute;
+  right: ${getRemValue(24)};
+
+  & > svg {
+    width: ${getRemValue(25)};
+    height: ${getRemValue(25)};
+    fill: rgb(var(--color-primary));
+  }
 `;

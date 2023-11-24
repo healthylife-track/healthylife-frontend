@@ -6,22 +6,31 @@ import {
   DashboardContentContainer,
   DashboardDataContainer,
   DashboardWrapper,
+  LogoutButton,
   MedDetailsContainer,
   MedHistoryItem,
   MedHistoryItems,
   MedicationHistory,
   MedicationStatus,
+  MobileCloseButton,
+  MobileProfileButton,
   NoNotificationContainer,
   NotificationContainer,
   NotificationItems,
   ProfileContainer,
   SetReminderContainer,
+  UserDataWrapper,
+  UserImageContainer,
+  UserProfileWrapper,
 } from '@/styles/dashboard.styles';
 import { NextPageWithLayout } from '../_app';
 import Button from '@/components/button/button';
 import { dateFormatWithTime } from '@/utils/dateFormats';
 import dummyData from '@/public/static-data/dummy-medications-data.json';
 import ShowView from '@/components/show-view/show-view';
+import Image from 'next/image';
+import getRemValue from '@/utils/getRemValue';
+import { useState } from 'react';
 
 const statusIcon: Record<string, string> = {
   completed: 'happy',
@@ -29,8 +38,25 @@ const statusIcon: Record<string, string> = {
 };
 
 const Dashboard: NextPageWithLayout = () => {
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <DashboardWrapper>
+      <MobileProfileButton onClick={() => setIsOpen(true)}>
+        <div>
+          <UserImageContainer>
+            <div>
+              <Image
+                src="/assets/user-icon.svg"
+                placeholder="blur"
+                blurDataURL="data:/assets/blurred-image.png"
+                sizes={`${getRemValue(34)}`}
+                alt="med-aid-sync-logo"
+                fill
+              />
+            </div>
+          </UserImageContainer>
+        </div>
+      </MobileProfileButton>
       <DashboardDataContainer>
         <SetReminderContainer>
           <CardIconContainer isTertiary>
@@ -146,7 +172,73 @@ const Dashboard: NextPageWithLayout = () => {
         </MedicationHistory>
       </DashboardDataContainer>
 
-      <ProfileContainer>profile</ProfileContainer>
+      <ProfileContainer isOpen={isOpen}>
+        <MobileCloseButton onClick={() => setIsOpen(false)}>
+          <SvgIcon name={isOpen ? 'close' : 'hamburger-menu'} />
+        </MobileCloseButton>
+
+        <DashboardCardHeaderContainer>
+          <SvgIcon name="user" />
+          <p>Profile</p>
+        </DashboardCardHeaderContainer>
+
+        <UserImageContainer isBigger>
+          <div>
+            <Image
+              src="/assets/user-icon.svg"
+              placeholder="blur"
+              blurDataURL="data:/assets/blurred-image.png"
+              sizes={`${getRemValue(100)}`}
+              alt="med-aid-sync-logo"
+              fill
+            />
+          </div>
+        </UserImageContainer>
+
+        <UserProfileWrapper>
+          <p>
+            <strong>Paul Oluwatoni</strong>
+          </p>
+          <p>paul@tonnipaul.com</p>
+
+          <div>
+            <UserDataWrapper>
+              <p>Medical Condition:</p>
+              <p>
+                <strong>Good Health</strong>
+              </p>
+            </UserDataWrapper>
+
+            <UserDataWrapper>
+              <p>Phone Number:</p>
+              <p>
+                <strong>+2348162325194</strong>
+              </p>
+            </UserDataWrapper>
+
+            <UserDataWrapper>
+              <p>Blood Group:</p>
+              <p>
+                <strong>O+</strong>
+              </p>
+            </UserDataWrapper>
+
+            <UserDataWrapper>
+              <p>Genotype</p>
+              <p>
+                <strong>AA</strong>
+              </p>
+            </UserDataWrapper>
+          </div>
+
+          <LogoutButton>
+            <Button primary>
+              <p>Logout</p>
+              <SvgIcon name="arrow-right" />
+            </Button>
+          </LogoutButton>
+        </UserProfileWrapper>
+      </ProfileContainer>
     </DashboardWrapper>
   );
 };
