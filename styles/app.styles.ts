@@ -28,7 +28,7 @@ const GlobalStyles = createGlobalStyle`
 
   body {
     color: rgb(var(--color-secondary-b));
-    background: rgb(var(--color-white));
+    background: rgb(var(--color-primary), 0.05);
     font-size: ${getRemValue(15)};
     font-weight: 400;
     line-height: 1.5;
@@ -60,8 +60,12 @@ const GlobalStyles = createGlobalStyle`
     opacity: 0.3;
   }
 
-  li {
+  ul > li {
     list-style: none;
+  }
+
+  ol > li {
+    margin-left: 1rem;
   }
 
 
