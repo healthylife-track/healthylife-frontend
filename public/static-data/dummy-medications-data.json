@@ -1,0 +1,47 @@
+[
+  {
+    "id": "1",
+    "drug_name": "paracetamol",
+    "drug_dosage": 100,
+    "reminderTime": "2023-11-25T16:33:00Z",
+    "interval": 2,
+    "days_to_complete": 4,
+    "status": "completed"
+  },
+  {
+    "id": "2",
+    "drug_name": "cough syrup",
+    "drug_dosage": 100,
+    "reminderTime": "2023-11-25T18:23:00Z",
+    "interval": 2,
+    "days_to_complete": 4,
+    "status": "missed"
+  },
+  {
+    "id": "3",
+    "drug_name": "paracetamol",
+    "drug_dosage": 100,
+    "reminderTime": "2023-11-25T20:43:00Z",
+    "interval": 2,
+    "days_to_complete": 4,
+    "status": "completed"
+  },
+  {
+    "id": "4",
+    "drug_name": "cough syrup",
+    "drug_dosage": 100,
+    "reminderTime": "2023-11-25T18:23:00Z",
+    "interval": 2,
+    "days_to_complete": 4,
+    "status": "missed"
+  },
+  {
+    "id": "5",
+    "drug_name": "paracetamol",
+    "drug_dosage": 100,
+    "reminderTime": "2023-11-25T20:43:00Z",
+    "interval": 2,
+    "days_to_complete": 4,
+    "status": "completed"
+  }
+]

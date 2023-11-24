@@ -1,0 +1,318 @@
+import getRemValue from '@/utils/getRemValue';
+import styled, { css } from 'styled-components';
+
+interface IDashboardStyleProps {
+  isPrimary?: boolean;
+  isFlex?: boolean;
+  zeroMargin?: boolean;
+  isNotBold?: boolean;
+  isMissed?: boolean;
+}
+
+export const DashboardNav = styled.nav`
+  padding: 1rem ${getRemValue(24)};
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const DashboardWrapper = styled.div`
+  padding: ${getRemValue(10)} ${getRemValue(24)};
+  @media screen and (min-width: 56.25em) {
+    display: flex;
+    gap: 2rem;
+
+    & > div:first-of-type {
+      flex: 1;
+    }
+  }
+`;
+
+export const LogoutButton = styled.div`
+  display: flex;
+  align-items: center;
+  gap: ${getRemValue(10)};
+`;
+
+export const UserImageContainer = styled.div`
+  padding: 3px;
+  border-radius: 50%;
+  border: 1px solid rgb(var(--color-primary));
+
+  & > div {
+    width: ${getRemValue(40)};
+    height: ${getRemValue(40)};
+    border-radius: 50%;
+    position: relative;
+  }
+
+  & > img {
+    object-fit: contain;
+    border-radius: 50%;
+  }
+`;
+
+const containerStyle = css`
+  border-radius: ${getRemValue(20)};
+  background: rgb(var(--color-white));
+  padding: ${getRemValue(24)};
+  transition: box-shadow 0.2s ease-in-out;
+  position: relative;
+
+  &:hover {
+    box-shadow: var(--box-shadow);
+  }
+`;
+
+export const ProfileContainer = styled.aside`
+  ${containerStyle}
+  width: 100%;
+
+  /* remove this later  */
+  @media screen and (max-width: 56.25em) {
+    margin-top: 2rem;
+  }
+  /* remove this later  */
+
+  @media screen and (min-width: 56.25em) {
+    max-width: ${getRemValue(400)};
+  }
+`;
+
+export const DashboardDataContainer = styled.div`
+  gap: 2rem;
+  display: grid;
+  grid-template-areas:
+    'reminder'
+    'notification'
+    'history';
+
+  @media screen and (min-width: 56.25em) {
+    grid-template-columns: 1fr 1.5fr;
+    grid-template-areas:
+      'reminder notification'
+      'history history';
+  }
+`;
+
+export const SetReminderContainer = styled.div`
+  ${containerStyle}
+
+  grid-area: reminder;
+
+  & > p:first-of-type {
+    font-size: ${getRemValue(20)};
+    font-weight: 700;
+    margin: ${getRemValue(24)} 0;
+  }
+
+  & > button {
+    font-size: ${getRemValue(18)};
+    font-weight: 700;
+    color: rgb(var(--color-tertiary));
+    display: flex;
+    align-items: center;
+    gap: ${getRemValue(10)};
+    margin: ${getRemValue(24)} 0;
+    padding: ${getRemValue(10)} 0;
+
+    & > svg {
+      width: ${getRemValue(15)};
+      height: ${getRemValue(15)};
+      fill: currentColor;
+    }
+  }
+`;
+
+export const NotificationContainer = styled.div`
+  ${containerStyle}
+  grid-area: notification;
+  position: relative;
+  overflow: hidden;
+`;
+
+export const MedicationHistory = styled.div`
+  ${containerStyle}
+  grid-area: history;
+`;
+
+export const DashboardCardHeaderContainer = styled.div<IDashboardStyleProps>`
+  display: flex;
+  gap: ${getRemValue(10)};
+  align-items: center;
+  font-size: ${getRemValue(18)};
+  font-weight: 700;
+  position: relative;
+  width: max-content;
+  padding-bottom: 8px;
+  border-color: rgb(var(--color-secondary-o));
+
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    border: 1px solid;
+    width: 65%;
+    bottom: 0;
+    border-color: inherit;
+  }
+
+  & > svg {
+    width: ${getRemValue(25)};
+    height: ${getRemValue(25)};
+    fill: rgb(var(--color-secondary-o));
+  }
+
+  ${({ isPrimary }) =>
+    isPrimary &&
+    `
+      border-color: rgb(var(--color-primary));
+      
+      & > svg {
+         fill: rgb(var(--color-primary));
+      }
+   `}
+`;
+
+export const NotificationItems = styled.ol`
+  width: 100%;
+  max-height: ${getRemValue(400)};
+  overflow-y: auto;
+  position: relative;
+
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  &:-webkit-scrollbar-thumb {
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+  }
+  &:hover::-webkit-scrollbar-thumb {
+    background-color: #c1c1c1;
+  }
+
+  @media screen and (min-width: 56.25em) {
+    max-height: ${getRemValue(250)};
+  }
+`;
+
+export const NoNotificationContainer = styled.div`
+  max-width: ${getRemValue(400)};
+  margin: ${getRemValue(10)} auto;
+  width: 100%;
+  aspect-ratio: 2/1;
+  place-items: center;
+  display: grid;
+  font-size: ${getRemValue(18)};
+  font-weight: 700;
+  color: rgb(var(--color-secondary-gr));
+  text-align: center;
+  padding: 1rem 0;
+
+  & > svg {
+    width: ${getRemValue(100)};
+    height: ${getRemValue(100)};
+    fill: rgb(var(--color-secondary-gr), 0.5);
+  }
+`;
+
+export const DashboardContentContainer = styled.div<IDashboardStyleProps>`
+  margin: 1rem 0;
+
+  ${({ isFlex }) =>
+    isFlex &&
+    `
+      display: flex;
+      gap: ${getRemValue(12)};
+   `}
+
+  ${({ zeroMargin }) =>
+    zeroMargin &&
+    `
+      margin: 0;
+   `}
+`;
+
+export const MedDetailsContainer = styled.div<IDashboardStyleProps>`
+  display: flex;
+  font-weight: 700;
+  align-self: center;
+  gap: 8px;
+  margin: ${getRemValue(10)} 0;
+
+  ${({ zeroMargin }) =>
+    zeroMargin &&
+    `
+      margin-bottom: 4px;
+   `}
+
+  ${({ isNotBold }) =>
+    isNotBold &&
+    `
+      font-weight: 400;
+   `}
+
+   & > p::first-letter {
+    text-transform: capitalize;
+  }
+
+  & > svg {
+    width: ${getRemValue(20)};
+    height: ${getRemValue(20)};
+  }
+`;
+export const MedHistoryItems = styled.div`
+  max-height: ${getRemValue(400)};
+  overflow-y: auto;
+  padding-right: 1rem;
+
+  @media screen and (min-width: 56.25em) {
+    max-height: ${getRemValue(250)};
+
+    &::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    &:-webkit-scrollbar-thumb {
+      cursor: pointer;
+      transition: background-color 0.2s ease-in-out;
+    }
+
+    &:hover::-webkit-scrollbar-thumb {
+      background-color: #c1c1c1;
+    }
+  }
+`;
+
+export const MedHistoryItem = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin: ${getRemValue(10)} 0;
+  width: 100%;
+  border-bottom: 1px solid rgb(var(--color-secondary-gr));
+
+  & > div:first-of-type {
+    flex: 1;
+  }
+`;
+
+export const MedicationStatus = styled.div<IDashboardStyleProps>`
+  display: flex;
+  color: rgb(var(--color-tertiary));
+  text-transform: capitalize;
+  align-items: center;
+  gap: ${getRemValue(12)};
+
+  & > svg {
+    fill: currentColor;
+    width: ${getRemValue(15)};
+    height: ${getRemValue(15)};
+  }
+
+  ${({ isMissed }) =>
+    isMissed &&
+    `
+      color: rgb(var(--color-error));
+   `}
+`;
