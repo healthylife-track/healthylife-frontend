@@ -81,8 +81,8 @@ const AboutPage: NextPageWithLayout = () => {
 
         <SolutionSectionImageContainer>
           <Image
-            src="/assets/med-aid-sync-hero.png"
-            alt="med-aid-sync-hero screenshot"
+            src="/assets/dashboard-image.png"
+            alt="dashboard-image screenshot"
             placeholder="blur"
             blurDataURL="data:/assets/blurred-image.png"
             sizes={`${getRemValue(350)}`}
