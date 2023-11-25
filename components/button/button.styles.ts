@@ -4,6 +4,8 @@ import styled from 'styled-components';
 export interface IButtonStyleProps {
   primary?: boolean;
   secondary?: boolean;
+  isTertiary?: boolean;
+  isTertiaryBorder?: boolean;
   block?: boolean;
 }
 
@@ -39,6 +41,29 @@ export const Btn = styled.button<IButtonStyleProps>`
       color: rgb(var(--color-white));
       background-color: rgb(var(--color-secondary-o));
       border-color: rgb(var(--color-secondary-o));
+
+      & > svg {
+      fill: currentColor;
+   }
+   `}
+
+    ${({ isTertiary }) =>
+    isTertiary &&
+    `
+      color: rgb(var(--color-white));
+      background-color: rgb(var(--color-tertiary));
+      border-color: rgb(var(--color-tertiary));
+
+      & > svg {
+      fill: currentColor;
+   }
+   `}
+
+    ${({ isTertiaryBorder }) =>
+    isTertiaryBorder &&
+    `
+      background-color: rgb(var(--color-white));
+      border-color: rgb(var(--color-tertiary));
 
       & > svg {
       fill: currentColor;
