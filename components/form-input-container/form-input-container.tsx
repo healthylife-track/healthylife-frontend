@@ -1,18 +1,20 @@
 import { FC, InputHTMLAttributes, useEffect, useState } from 'react';
-import { useController, UseControllerProps } from 'react-hook-form';
+import { UseControllerProps, useController } from 'react-hook-form';
+import ShowView from '../show-view/show-view';
+import SvgIcon from '../svg-icon/svg-icon';
 import {
+  Input,
   InputFlexContainer,
   InputFooterText,
-  TogglePasswordBtn,
   InputFormField,
-  Input,
+  TogglePasswordBtn,
 } from './form-input-container.styles';
-import SvgIcon from '../svg-icon/svg-icon';
 
 interface IFormInputProps extends InputHTMLAttributes<HTMLInputElement> {
   htmlFor: string;
   label: string;
   isPasswordType?: boolean;
+  description?: string;
   // eslint-disable-next-line  @typescript-eslint/no-explicit-any
   controller: UseControllerProps<any>;
 }
@@ -21,6 +23,7 @@ const FormInputContainer: FC<IFormInputProps> = ({
   htmlFor,
   label,
   isPasswordType,
+  description,
   controller,
   ...props
 }) => {
@@ -45,27 +48,34 @@ const FormInputContainer: FC<IFormInputProps> = ({
   return (
     <InputFormField>
       <label htmlFor={htmlFor}>{label}</label>
-      <>
-        {isPasswordType ? (
-          <InputFlexContainer>
-            <Input
-              {...props}
-              {...{ ...field }}
-              type={showPassword ? 'text' : 'password'}
-            />
-            <TogglePasswordBtn
-              type="button"
-              tabIndex={-1}
-              onClick={() => setShowPassword(!showPassword)}
-            >
-              <SvgIcon name={!showPassword ? 'eye-open' : 'eye-close'} />
-            </TogglePasswordBtn>
-          </InputFlexContainer>
-        ) : (
-          <Input {...props} {...{ ...field }} />
-        )}
-      </>
-      <>{error && <InputFooterText>{error.message}</InputFooterText>}</>
+      <ShowView when={isPasswordType !== undefined}>
+        <InputFlexContainer>
+          <Input
+            {...props}
+            {...{ ...field }}
+            type={showPassword ? 'text' : 'password'}
+          />
+          <TogglePasswordBtn
+            type="button"
+            tabIndex={-1}
+            onClick={() => setShowPassword(!showPassword)}
+          >
+            <SvgIcon name={!showPassword ? 'eye-open' : 'eye-close'} />
+          </TogglePasswordBtn>
+        </InputFlexContainer>
+      </ShowView>
+
+      <ShowView when={!isPasswordType}>
+        <Input {...props} {...{ ...field }} />
+      </ShowView>
+
+      <ShowView when={!!error}>
+        <InputFooterText>{error?.message}</InputFooterText>
+      </ShowView>
+
+      <ShowView when={description !== '' && !error}>
+        <InputFooterText noError>{description}</InputFooterText>
+      </ShowView>
     </InputFormField>
   );
 };

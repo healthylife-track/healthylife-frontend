@@ -20,8 +20,10 @@ export const DashboardNav = styled.nav`
 
 export const DashboardWrapper = styled.div`
   padding: ${getRemValue(10)} ${getRemValue(24)};
+
   @media screen and (min-width: 56.25em) {
     display: flex;
+    position: relative;
     gap: 2rem;
 
     & > div:first-of-type {
@@ -42,6 +44,7 @@ export const UserImageContainer = styled.div<IDashboardStyleProps>`
   padding: 3px;
   border-radius: 50%;
   border: 1px solid rgb(var(--color-primary));
+  z-index: 12;
 
   ${({ isBigger }) =>
     isBigger &&
@@ -53,6 +56,7 @@ export const UserImageContainer = styled.div<IDashboardStyleProps>`
       & > div {
          width: ${getRemValue(100)};
          height: ${getRemValue(100)};
+         z-index: 0;
       }
    `}
   }
@@ -325,6 +329,8 @@ export const ProfileContainer = styled.aside<IDashboardStyleProps>`
   padding: 2rem;
   width: 100%;
   height: max-content;
+  position: sticky;
+  top: ${getRemValue(24)};
 
   @media screen and (max-width: 56.25em) {
     position: fixed;
@@ -378,6 +384,11 @@ export const MobileProfileButton = styled.button`
 export const MobileCloseButton = styled.button`
   position: absolute;
   right: ${getRemValue(24)};
+  display: none;
+
+  @media screen and (max-width: 56.25em) {
+    display: block;
+  }
 
   & > svg {
     width: ${getRemValue(25)};
