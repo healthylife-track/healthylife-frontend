@@ -25,10 +25,7 @@ export const InputFormField = styled.div`
     font-size: ${getRemValue(15)};
     font-weight: 600;
     display: block;
-
-    @media screen and (min-width: 56.25em) {
-      font-size: ${getRemValue(20)};
-    }
+    width: max-content;
   }
 
   & > button {
@@ -40,12 +37,17 @@ export const InputFormField = styled.div`
 `;
 
 export const Input = styled.input`
-  border: 1px solid rgb(var(--color-primary), 0.7);
+  border: 1px solid rgb(var(--color-primary));
   outline: none;
   margin: 1rem 0;
   width: 100%;
   padding: 1rem 2rem;
   border-radius: ${getRemValue(25)};
+
+  &[type='time'] {
+    background-color: rgb(var(--color-white));
+    padding: ${getRemValue(14)};
+  }
 
   &::placeholder {
     font-family: inherit;
@@ -76,10 +78,24 @@ export const TogglePasswordBtn = styled.button`
   }
 `;
 
-export const InputFooterText = styled.small`
+export const InputFooterText = styled.small<{
+  noError?: boolean;
+  hasSpace?: boolean;
+}>`
   position: relative;
   font-size: ${getRemValue(10)};
   color: red;
   left: 5px;
   top: ${getRemValue(-14)};
+
+  ${({ noError }) =>
+    noError &&
+    `
+    color: initial;
+  `}
+  ${({ hasSpace }) =>
+    hasSpace &&
+    `
+    top: 0
+  `}
 `;
