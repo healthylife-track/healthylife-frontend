@@ -31,6 +31,8 @@ import ShowView from '@/components/show-view/show-view';
 import Image from 'next/image';
 import getRemValue from '@/utils/getRemValue';
 import { useState } from 'react';
+import Modal from '@/components/modal/modal';
+import SetReminder from '@/components/cards/set-reminder-card/set-reminder-card';
 
 const statusIcon: Record<string, string> = {
   completed: 'happy',
@@ -42,7 +44,7 @@ const Dashboard: NextPageWithLayout = () => {
   return (
     <DashboardWrapper>
       <MobileProfileButton onClick={() => setIsOpen(true)}>
-        <div>
+        <div style={{ zIndex: 10 }}>
           <UserImageContainer>
             <div>
               <Image
@@ -57,6 +59,7 @@ const Dashboard: NextPageWithLayout = () => {
           </UserImageContainer>
         </div>
       </MobileProfileButton>
+
       <DashboardDataContainer>
         <SetReminderContainer>
           <CardIconContainer isTertiary>
@@ -68,10 +71,23 @@ const Dashboard: NextPageWithLayout = () => {
             Set reminders to track your medical adherence, and get notification.
           </p>
 
-          <button>
-            <p>Set Reminder</p>
-            <SvgIcon name="arrow-right" />
-          </button>
+          <Modal
+            trigger={
+              <button>
+                <p>Set Reminder</p>
+                <SvgIcon name="arrow-right" />
+              </button>
+            }
+            title={
+              <CardIconContainer isTertiary>
+                <SvgIcon name="notification-bell" />
+              </CardIconContainer>
+            }
+            disableEscapeDown
+            disableOutsideClick
+          >
+            <SetReminder />
+          </Modal>
         </SetReminderContainer>
 
         <NotificationContainer>
@@ -174,7 +190,7 @@ const Dashboard: NextPageWithLayout = () => {
 
       <ProfileContainer isOpen={isOpen}>
         <MobileCloseButton onClick={() => setIsOpen(false)}>
-          <SvgIcon name={isOpen ? 'close' : 'hamburger-menu'} />
+          <SvgIcon name="close" />
         </MobileCloseButton>
 
         <DashboardCardHeaderContainer>
