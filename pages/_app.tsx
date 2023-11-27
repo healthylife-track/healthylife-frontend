@@ -3,6 +3,7 @@ import { NextPage } from 'next';
 import type { AppProps } from 'next/app';
 import { Montserrat } from 'next/font/google';
 import { ReactElement, ReactNode } from 'react';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
 export const montserrat = Montserrat({ subsets: ['latin'], display: 'swap' });
 
@@ -16,6 +17,7 @@ type AppPropsWithLayout = AppProps & {
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout || ((page: ReactNode) => page);
+  const queryClient = new QueryClient();
 
   return (
     <>
@@ -24,8 +26,10 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
           font-family: ${montserrat.style.fontFamily};
         }
       `}</style>
-      <GlobalStyles />
-      {getLayout(<Component {...pageProps} />)}
+      <QueryClientProvider client={queryClient}>
+        <GlobalStyles />
+        {getLayout(<Component {...pageProps} />)}
+      </QueryClientProvider>
     </>
   );
 }

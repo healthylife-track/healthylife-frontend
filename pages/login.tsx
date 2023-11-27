@@ -22,9 +22,12 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import isEmail from 'validator/lib/isEmail';
 import { NextPageWithLayout } from './_app';
 import { ISignInSchema } from '@/types/auth.type';
+import useLogin from '@/server-store/mutations/useLogin';
+import { useRouter } from 'next/router';
 
 const Login: NextPageWithLayout = () => {
   const [userType, setUserType] = useState('');
+  const router = useRouter();
 
   const defaultValues: ISignInSchema = {
     email: '',
@@ -36,6 +39,8 @@ const Login: NextPageWithLayout = () => {
     defaultValues,
   });
 
+  const { mutate: userLogin, isLoading: isLoading } = useLogin();
+
   const onSubmit: SubmitHandler<ISignInSchema> = async (data) => {
     const { email, password } = data;
 
@@ -46,9 +51,16 @@ const Login: NextPageWithLayout = () => {
     };
     const jsonData = JSON.stringify(payload);
 
+    userLogin(payload, {
+      onSuccess: async () => {
+        reset();
+        router.push(routes.dashboard());
+      },
+    });
+
     console.log('Signed In:', jsonData);
 
-    reset();
+    // reset();
   };
 
   return (
@@ -111,7 +123,7 @@ const Login: NextPageWithLayout = () => {
               <label htmlFor="checkbox">Remember me</label>
             </AuthCheckboxContainer>
 
-            <FormButton>
+            <FormButton disabled={isLoading}>
               <p>
                 Login as <span>{userType}</span>
               </p>
