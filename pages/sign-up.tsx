@@ -23,9 +23,11 @@ import isAlpha from 'validator/lib/isAlpha';
 import { NextPageWithLayout } from './_app';
 import { ISignUpSchema } from '@/types/auth.type';
 import useSignUp from '@/server-store/mutations/useSIgnUp';
+import { useRouter } from 'next/router';
 
 const SignUp: NextPageWithLayout = () => {
   const [userType, setUserType] = useState('');
+  const router = useRouter();
 
   const defaultValues: ISignUpSchema = {
     email: '',
@@ -57,15 +59,14 @@ const SignUp: NextPageWithLayout = () => {
       role: userType,
     };
 
+    router.push(routes.dashboard());
+
     userSignUp(payload, {
       onSuccess: () => {
         reset();
       },
     });
 
-    const jsonData = JSON.stringify(data);
-    console.log('SU Data:', jsonData);
-    console.log('da', payload);
     // reset();
   };
 

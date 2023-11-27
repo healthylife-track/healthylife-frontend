@@ -49,16 +49,13 @@ const Login: NextPageWithLayout = () => {
       password,
       role: userType,
     };
-    const jsonData = JSON.stringify(payload);
-
+    console.log('Data', payload);
+    router.push(routes.dashboard());
     userLogin(payload, {
       onSuccess: async () => {
         reset();
-        router.push(routes.dashboard());
       },
     });
-
-    console.log('Signed In:', jsonData);
 
     // reset();
   };
