@@ -22,6 +22,7 @@ import isMobilePhone from 'validator/lib/isMobilePhone';
 import isAlpha from 'validator/lib/isAlpha';
 import { NextPageWithLayout } from './_app';
 import { ISignUpSchema } from '@/types/auth.type';
+import useSignUp from '@/server-store/mutations/useSIgnUp';
 
 const SignUp: NextPageWithLayout = () => {
   const [userType, setUserType] = useState('');
@@ -44,6 +45,8 @@ const SignUp: NextPageWithLayout = () => {
     defaultValues,
   });
 
+  const { mutate: userSignUp, isLoading: isLoading } = useSignUp();
+
   const validLastName = (value: string) => {
     return /^[A-Za-z]+(?:-[A-Za-z]+)?$/.test(value);
   };
@@ -53,10 +56,17 @@ const SignUp: NextPageWithLayout = () => {
       ...data,
       role: userType,
     };
+
+    userSignUp(payload, {
+      onSuccess: () => {
+        reset();
+      },
+    });
+
     const jsonData = JSON.stringify(data);
     console.log('SU Data:', jsonData);
     console.log('da', payload);
-    reset();
+    // reset();
   };
 
   const watchedPassword = watch('password');
@@ -274,7 +284,7 @@ const SignUp: NextPageWithLayout = () => {
               }}
             />
 
-            <FormButton>
+            <FormButton disabled={isLoading}>
               <p>
                 Sign up as <span>{userType}</span>
               </p>
