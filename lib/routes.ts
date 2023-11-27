@@ -3,6 +3,7 @@ const about = () => '/about';
 const contact = () => '/contact';
 const login = () => '/login';
 const signUp = () => '/sign-up';
+const dashboard = () => '/dashboard';
 
 const routes = {
   home,
@@ -10,6 +11,7 @@ const routes = {
   contact,
   login,
   signUp,
+  dashboard,
 };
 
 export default routes;
