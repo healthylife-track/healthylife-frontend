@@ -26,6 +26,10 @@ const GlobalStyles = createGlobalStyle`
     -webkit-appearance: none;
   }
 
+  html {
+    font-size: 85%;
+  }
+
   body {
     color: rgb(var(--color-secondary-b));
     background: rgb(var(--color-primary), 0.05);

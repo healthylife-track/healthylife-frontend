@@ -30,9 +30,14 @@ import dummyData from '@/public/static-data/dummy-medications-data.json';
 import ShowView from '@/components/show-view/show-view';
 import Image from 'next/image';
 import getRemValue from '@/utils/getRemValue';
-import { useState } from 'react';
-import Modal from '@/components/modal/modal';
+import { useRef, useState } from 'react';
+import Modal, { ModalRefActions } from '@/components/modal/modal';
 import SetReminder from '@/components/cards/set-reminder-card/set-reminder-card';
+import useLogOut from '@/server-store/mutations/useLogout';
+import { useRouter } from 'next/router';
+import routes from '@/lib/routes';
+import { CreateReminderSuccessContainer } from '@/components/cards/set-reminder-card/set-reminder-card.styles';
+import BtnLoader from '@/components/btn-loaders/loader';
 
 const statusIcon: Record<string, string> = {
   completed: 'happy',
@@ -41,6 +46,20 @@ const statusIcon: Record<string, string> = {
 
 const Dashboard: NextPageWithLayout = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const router = useRouter();
+  const successModalRef = useRef<ModalRefActions>(null);
+
+  const handleSuccessModal = () => {
+    console.log('Open Success');
+    successModalRef?.current?.open();
+  };
+
+  const { mutate: logOut, isLoading: loading } = useLogOut();
+
+  const handleLogout = () => {
+    logOut();
+    router.replace(routes.login());
+  };
   return (
     <DashboardWrapper>
       <MobileProfileButton onClick={() => setIsOpen(true)}>
@@ -86,7 +105,28 @@ const Dashboard: NextPageWithLayout = () => {
             disableEscapeDown
             disableOutsideClick
           >
-            <SetReminder />
+            {(close) => (
+              <SetReminder
+                closeModal={close}
+                openSuccessModal={handleSuccessModal}
+              />
+            )}
+          </Modal>
+
+          <Modal ref={successModalRef} trigger={<></>}>
+            <CreateReminderSuccessContainer>
+              <div>
+                <div>
+                  <Image
+                    src="/assets/success-check.png"
+                    alt="success-check-icon"
+                    fill
+                  />
+                </div>
+                <p>Reminder Created!</p>
+                <small>Your reminder has been created successfully.</small>
+              </div>
+            </CreateReminderSuccessContainer>
           </Modal>
         </SetReminderContainer>
 
@@ -248,9 +288,14 @@ const Dashboard: NextPageWithLayout = () => {
           </div>
 
           <LogoutButton>
-            <Button primary>
-              <p>Logout</p>
-              <SvgIcon name="arrow-right" />
+            <Button primary onClick={handleLogout} disabled={loading}>
+              <ShowView when={!loading}>
+                <p>Logout</p>
+                <SvgIcon name="arrow-right" />
+              </ShowView>
+              <ShowView when={loading}>
+                <BtnLoader />
+              </ShowView>
             </Button>
           </LogoutButton>
         </UserProfileWrapper>
