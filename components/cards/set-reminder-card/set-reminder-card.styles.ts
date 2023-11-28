@@ -52,3 +52,39 @@ export const SelectIntervalButton = styled.button<{ isSelected?: boolean }>`
    color: rgb(var(--color-white));
    `}
 `;
+
+export const CreateReminderSuccessContainer = styled.div`
+  position: relative;
+
+  background: rgb(var(--color-white));
+
+  min-height: ${getRemValue(300)};
+
+  & > div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: grid;
+    place-items: center;
+
+    & > div {
+      position: relative;
+      width: 100%;
+      max-width: ${getRemValue(250)};
+      aspect-ratio: 1;
+
+      & > img {
+        object-fit: contain;
+      }
+    }
+
+    & > p {
+      font-weight: 700;
+    }
+
+    & > p {
+      margin-top: -70px;
+    }
+  }
+`;
