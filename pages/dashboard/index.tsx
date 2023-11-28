@@ -38,6 +38,7 @@ import { useRouter } from 'next/router';
 import routes from '@/lib/routes';
 import { CreateReminderSuccessContainer } from '@/components/cards/set-reminder-card/set-reminder-card.styles';
 import BtnLoader from '@/components/btn-loaders/loader';
+import useGetReminders from '@/server-store/queries/useGetReminders';
 
 const statusIcon: Record<string, string> = {
   completed: 'happy',
@@ -46,8 +47,14 @@ const statusIcon: Record<string, string> = {
 
 const Dashboard: NextPageWithLayout = () => {
   const [isOpen, setIsOpen] = useState(false);
+
   const router = useRouter();
   const successModalRef = useRef<ModalRefActions>(null);
+
+  const userID = '1';
+  const { data } = useGetReminders(userID);
+
+  const reminders = data?.reminders || [];
 
   const handleSuccessModal = () => {
     console.log('Open Success');
@@ -136,14 +143,14 @@ const Dashboard: NextPageWithLayout = () => {
             <p>Upcoming Reminders</p>
           </DashboardCardHeaderContainer>
 
-          <ShowView when={dummyData.length <= 0}>
+          <ShowView when={reminders.length <= 0}>
             <NoNotificationContainer>
               <SvgIcon name="bell-slash" />
               <p>You don’t have any notification.</p>
             </NoNotificationContainer>
           </ShowView>
 
-          <ShowView when={dummyData.length > 0}>
+          <ShowView when={reminders.length > 0}>
             <NotificationItems>
               {dummyData.map((data) => (
                 <li key={data.id}>
