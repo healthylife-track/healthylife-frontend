@@ -1,3 +1,4 @@
+import BtnLoader from '@/components/btn-loaders/loader';
 import Counter from '@/components/counter/counter';
 import FormInputContainer from '@/components/form-input-container/form-input-container';
 import {
@@ -5,6 +6,7 @@ import {
   InputFormField,
 } from '@/components/form-input-container/form-input-container.styles';
 import SvgIcon from '@/components/svg-icon/svg-icon';
+import useSetNewReminder from '@/server-store/mutations/useSetNewReminder';
 import { FormButton } from '@/styles/auth.styles';
 import { ICreateNewReminderSchema } from '@/types/set-reminder-types';
 import { useState } from 'react';
@@ -16,26 +18,50 @@ import {
   SetReminderWrapper,
 } from './set-reminder-card.styles';
 
-const intervals = [2, 4, 6, 8, 12, 24];
+interface ICreateReminderProps {
+  closeModal?: () => void;
+  openSuccessModal?: () => void;
+}
+
+const intervals = ['2', '4', '6', '8', '12', '24'];
 
 const defaultValues: ICreateNewReminderSchema = {
-  drug_name: '',
-  drug_dosage: '',
-  frequency: 0,
-  start_time: '',
-  days: '',
+  drugName: '',
+  drugDosage: '',
+  time: '',
+  timeInterval: '',
+  dayInterval: '',
+  usage: '',
+  userId: '1',
 };
 
-const SetReminder = () => {
-  const [selectedInterval, setSelectedInterval] = useState(0);
+const SetReminder = ({
+  closeModal,
+  openSuccessModal,
+}: ICreateReminderProps) => {
+  const [selectedInterval, setSelectedInterval] = useState('');
   const [days, setDays] = useState(1);
   const { handleSubmit, control, reset } = useForm<ICreateNewReminderSchema>({
     defaultValues,
   });
 
+  const { mutate: createReminder, isLoading: loading } = useSetNewReminder();
+
   const onSubmit: SubmitHandler<ICreateNewReminderSchema> = async (data) => {
-    console.log('submit', data);
-    reset;
+    const payload: ICreateNewReminderSchema = {
+      ...data,
+      timeInterval: selectedInterval,
+      dayInterval: days.toString(),
+    };
+
+    createReminder(payload, {
+      onSuccess: async () => {
+        closeModal?.();
+        openSuccessModal?.();
+      },
+    });
+
+    reset();
   };
 
   return (
@@ -52,7 +78,7 @@ const SetReminder = () => {
             id="drug-name"
             controller={{
               control,
-              name: 'drug_name',
+              name: 'drugName',
               rules: {
                 required: `Please enter drug name`,
               },
@@ -66,7 +92,7 @@ const SetReminder = () => {
             id="drug-dosage"
             controller={{
               control,
-              name: 'drug_dosage',
+              name: 'drugDosage',
               rules: {
                 required: `Please enter drug dosage`,
               },
@@ -96,7 +122,7 @@ const SetReminder = () => {
               {intervals.map((interval) => (
                 <SelectIntervalButton
                   key={interval}
-                  isSelected={selectedInterval === interval}
+                  isSelected={selectedInterval === interval.toString()}
                   onClick={() => setSelectedInterval(interval)}
                   type="button"
                 >
@@ -107,17 +133,23 @@ const SetReminder = () => {
           </InputFormField>
 
           <InputFormField>
-            <label htmlFor="days">Days</label>
+            <label htmlFor="days">Days Interval</label>
             <Counter number={days} name="days" setNumber={setDays} id="days" />
             <InputFooterText noError hasSpace>
-              Duration of the medication cycle.
+              Days it will take you to complete medication.
             </InputFooterText>
           </InputFormField>
         </div>
 
-        <FormButton style={{ gridArea: 'button' }}>
-          <p>Create Reminder</p>
-          <SvgIcon name="arrow-right" />
+        <FormButton style={{ gridArea: 'button' }} disabled={loading}>
+          {loading ? (
+            <BtnLoader />
+          ) : (
+            <>
+              <p>Create Reminder</p>
+              <SvgIcon name="arrow-right" />
+            </>
+          )}
         </FormButton>
       </SetReminderFormContainer>
     </SetReminderWrapper>

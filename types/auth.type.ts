@@ -5,8 +5,8 @@ export interface ISignInSchema {
 }
 
 export interface ISignUpSchema extends ISignInSchema {
-  firstName: string;
-  lastName: string;
+  firstname: string;
+  lastname: string;
   phoneNo: string;
   bloodGroup: string;
   genotype: string;

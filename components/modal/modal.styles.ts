@@ -28,9 +28,12 @@ export const ModalOverlay = styled(Overlay)`
 export const ModalContent = styled(Content)`
   padding: ${getRemValue(24)};
   min-width: ${getRemValue(500)};
+  max-height: ${getRemValue(500)};
   width: 100%;
   max-width: ${getRemValue(700)};
   margin: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
   position: relative;
   background: rgb(var(--color-white));
   border-radius: 0.8rem;
@@ -49,6 +52,7 @@ export const ModalClose = styled(Close)`
   margin-bottom: 1rem;
   height: max-content;
   fill: rgb(var(--color-primary));
+  z-index: 2;
 `;
 
 export const TitleContainer = styled.div`
