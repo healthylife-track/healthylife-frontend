@@ -4,7 +4,7 @@ export interface ISignInSchema {
   role: string;
 }
 
-export interface ISignUpSchema extends ISignInSchema {
+export interface IUserTypes extends ISignInSchema {
   firstname: string;
   lastname: string;
   phoneNo: string;
@@ -12,6 +12,9 @@ export interface ISignUpSchema extends ISignInSchema {
   genotype: string;
   medicalCondition: string;
   LicenseNo: string;
+}
+
+export interface ISignUpSchema extends IUserTypes {
   password: string;
   confirmPassword: string;
 }

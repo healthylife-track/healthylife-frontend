@@ -39,6 +39,7 @@ import routes from '@/lib/routes';
 import { CreateReminderSuccessContainer } from '@/components/cards/set-reminder-card/set-reminder-card.styles';
 import BtnLoader from '@/components/btn-loaders/loader';
 import useGetReminders from '@/server-store/queries/useGetReminders';
+import useGetMedicationHistory from '@/server-store/queries/getMedicationHistory';
 
 const statusIcon: Record<string, string> = {
   completed: 'happy',
@@ -51,13 +52,15 @@ const Dashboard: NextPageWithLayout = () => {
   const router = useRouter();
   const successModalRef = useRef<ModalRefActions>(null);
 
-  const userID = '1';
+  const userID = '8';
   const { data } = useGetReminders(userID);
+  const { data: medicationHistory } = useGetMedicationHistory(userID);
 
   const reminders = data?.reminders || [];
+  const medHistory = medicationHistory?.history || [];
+  console.log('MH:', medHistory);
 
   const handleSuccessModal = () => {
-    console.log('Open Success');
     successModalRef?.current?.open();
   };
 
@@ -190,14 +193,14 @@ const Dashboard: NextPageWithLayout = () => {
             <p>Medication History</p>
           </DashboardCardHeaderContainer>
 
-          <ShowView when={dummyData.length <= 0}>
+          <ShowView when={medHistory.length <= 0}>
             <NoNotificationContainer>
               <SvgIcon name="file-circle-plus" />
               <p>Your Medication History is empty.</p>
             </NoNotificationContainer>
           </ShowView>
 
-          <ShowView when={dummyData.length > 0}>
+          <ShowView when={medHistory.length > 0}>
             <DashboardContentContainer>
               <p>November 2023</p>
 
