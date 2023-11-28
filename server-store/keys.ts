@@ -3,6 +3,7 @@ const ReactQueryKeys = {
   LOGIN: 'LOGIN',
   LOGOUT: 'LOGOUT',
   GET_REMINDERS: 'GET_REMINDERS',
+  GET_MEDICATION_HISTORY: 'GET_MEDICATION_HISTORY',
 };
 
 export default ReactQueryKeys;
