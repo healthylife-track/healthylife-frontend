@@ -58,7 +58,7 @@ const Modal = forwardRef<unknown, IModalProps>(
       open: () => {
         setIsOpen(true);
       },
-      close: closeModal,
+      close: () => setIsOpen(false),
     }));
     return (
       <Root open={isOpen} onOpenChange={setIsOpen}>
