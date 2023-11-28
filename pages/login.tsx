@@ -24,6 +24,7 @@ import { NextPageWithLayout } from './_app';
 import { ISignInSchema } from '@/types/auth.type';
 import useLogin from '@/server-store/mutations/useLogin';
 import { useRouter } from 'next/router';
+import BtnLoader from '@/components/btn-loaders/loader';
 
 const Login: NextPageWithLayout = () => {
   const [userType, setUserType] = useState('');
@@ -39,7 +40,7 @@ const Login: NextPageWithLayout = () => {
     defaultValues,
   });
 
-  const { mutate: userLogin, isLoading: isLoading } = useLogin();
+  const { mutate: userLogin, isLoading: loading } = useLogin();
 
   const onSubmit: SubmitHandler<ISignInSchema> = async (data) => {
     const { email, password } = data;
@@ -49,15 +50,12 @@ const Login: NextPageWithLayout = () => {
       password,
       role: userType,
     };
-    console.log('Data', payload);
-    router.push(routes.dashboard());
     userLogin(payload, {
       onSuccess: async () => {
+        router.push(routes.dashboard());
         reset();
       },
     });
-
-    // reset();
   };
 
   return (
@@ -120,11 +118,17 @@ const Login: NextPageWithLayout = () => {
               <label htmlFor="checkbox">Remember me</label>
             </AuthCheckboxContainer>
 
-            <FormButton disabled={isLoading}>
-              <p>
-                Login as <span>{userType}</span>
-              </p>
-              <SvgIcon name="arrow-right" />
+            <FormButton disabled={loading}>
+              <ShowView when={loading}>
+                <BtnLoader />
+              </ShowView>
+
+              <ShowView when={!loading}>
+                <p>
+                  Login as <span>{userType}</span>
+                </p>
+                <SvgIcon name="arrow-right" />
+              </ShowView>
             </FormButton>
           </AuthFormContainer>
 

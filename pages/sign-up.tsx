@@ -24,6 +24,7 @@ import { NextPageWithLayout } from './_app';
 import { ISignUpSchema } from '@/types/auth.type';
 import useSignUp from '@/server-store/mutations/useSIgnUp';
 import { useRouter } from 'next/router';
+import BtnLoader from '@/components/btn-loaders/loader';
 
 const SignUp: NextPageWithLayout = () => {
   const [userType, setUserType] = useState('');
@@ -32,8 +33,8 @@ const SignUp: NextPageWithLayout = () => {
   const defaultValues: ISignUpSchema = {
     email: '',
     role: userType,
-    firstName: '',
-    lastName: '',
+    firstname: '',
+    lastname: '',
     phoneNo: '',
     bloodGroup: '',
     genotype: '',
@@ -47,7 +48,7 @@ const SignUp: NextPageWithLayout = () => {
     defaultValues,
   });
 
-  const { mutate: userSignUp, isLoading: isLoading } = useSignUp();
+  const { mutate: userSignUp, isLoading: loading } = useSignUp();
 
   const validLastName = (value: string) => {
     return /^[A-Za-z]+(?:-[A-Za-z]+)?$/.test(value);
@@ -59,15 +60,12 @@ const SignUp: NextPageWithLayout = () => {
       role: userType,
     };
 
-    router.push(routes.dashboard());
-
     userSignUp(payload, {
       onSuccess: () => {
+        router.push(routes.dashboard());
         reset();
       },
     });
-
-    // reset();
   };
 
   const watchedPassword = watch('password');
@@ -100,7 +98,7 @@ const SignUp: NextPageWithLayout = () => {
               placeholder={`Enter your first name`}
               controller={{
                 control,
-                name: 'firstName',
+                name: 'firstname',
                 rules: {
                   required: 'Please enter your first name',
                   validate: {
@@ -120,7 +118,7 @@ const SignUp: NextPageWithLayout = () => {
               placeholder={`Enter your last name`}
               controller={{
                 control,
-                name: 'lastName',
+                name: 'lastname',
                 rules: {
                   required: 'Please enter your last name',
                   validate: {
@@ -285,11 +283,17 @@ const SignUp: NextPageWithLayout = () => {
               }}
             />
 
-            <FormButton disabled={isLoading}>
-              <p>
-                Sign up as <span>{userType}</span>
-              </p>
-              <SvgIcon name="arrow-right" />
+            <FormButton disabled={loading}>
+              <ShowView when={loading}>
+                <BtnLoader />
+              </ShowView>
+
+              <ShowView when={!loading}>
+                <p>
+                  Sign up as <span>{userType}</span>
+                </p>
+                <SvgIcon name="arrow-right" />
+              </ShowView>
             </FormButton>
           </AuthFormContainer>
 
