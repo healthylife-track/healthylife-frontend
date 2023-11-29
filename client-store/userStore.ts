@@ -10,7 +10,7 @@ export interface ISessionSliceType {
   clearUser: () => void;
 }
 
-export const userSlice: StateCreator<ISessionSliceType> = (set) => ({
+export const userStore: StateCreator<ISessionSliceType> = (set) => ({
   user: null,
   sessionCookie: null,
   setUser: (data) => {

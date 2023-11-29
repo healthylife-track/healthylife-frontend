@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { ISessionSliceType, userSlice } from './userSlice';
+import { ISessionSliceType, userStore } from './userStore';
 import { persist } from 'zustand/middleware';
 
 interface StoreTypes extends ISessionSliceType {}
@@ -7,7 +7,7 @@ interface StoreTypes extends ISessionSliceType {}
 export const useStore = create<StoreTypes>()(
   persist(
     (...a) => ({
-      ...userSlice(...a),
+      ...userStore(...a),
     }),
     { name: 'med-aid-sync' }
   )
