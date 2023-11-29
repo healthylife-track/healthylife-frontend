@@ -4,7 +4,7 @@ import { api } from '../utils';
 
 interface ILogOutResponse {}
 const logOut = async (): Promise<ILogOutResponse> => {
-  const response = await api.post('/logout/');
+  const response = await api.get('/logout/');
 
   return response.data;
 };
