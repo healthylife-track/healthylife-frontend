@@ -40,6 +40,7 @@ import { CreateReminderSuccessContainer } from '@/components/cards/set-reminder-
 import BtnLoader from '@/components/btn-loaders/loader';
 import useGetReminders from '@/server-store/queries/useGetReminders';
 import useGetMedicationHistory from '@/server-store/queries/getMedicationHistory';
+import useGetUser from '@/server-store/queries/getUsers';
 
 const statusIcon: Record<string, string> = {
   completed: 'happy',
@@ -52,9 +53,11 @@ const Dashboard: NextPageWithLayout = () => {
   const router = useRouter();
   const successModalRef = useRef<ModalRefActions>(null);
 
-  const userID = '8';
+  const userID = 1;
   const { data } = useGetReminders(userID);
   const { data: medicationHistory } = useGetMedicationHistory(userID);
+
+  const { data: userData } = useGetUser();
 
   const reminders = data?.reminders || [];
   const medHistory = medicationHistory?.history || [];
@@ -65,6 +68,8 @@ const Dashboard: NextPageWithLayout = () => {
   };
 
   const { mutate: logOut, isLoading: loading } = useLogOut();
+
+  console.log('USER DATA', userData);
 
   const handleLogout = () => {
     logOut();
