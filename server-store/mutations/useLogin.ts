@@ -1,9 +1,12 @@
-import ReactQueryKeys from '../keys';
-import { useMutation } from 'react-query';
-import { api } from '../utils';
 import { ISignInSchema } from '@/types/auth.type';
+import { useMutation } from 'react-query';
+import ReactQueryKeys from '../keys';
+import { api } from '../utils';
 
-interface ILoginResponse {}
+interface ILoginResponse {
+  id: number;
+  msg: string;
+}
 const login = async (data: ISignInSchema): Promise<ILoginResponse> => {
   const response = await api.post('/login/', data);
 
