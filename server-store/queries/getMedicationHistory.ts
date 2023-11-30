@@ -17,14 +17,14 @@ interface IGetMedicationHistoryResponse {
   history: IMedHistorySchema[];
 }
 const getMedicationHistory = async (
-  userID: string
+  userID: number
 ): Promise<IGetMedicationHistoryResponse> => {
   const response = await api.get(`/medical_history/${userID}/`);
 
   return response.data;
 };
 
-const useGetMedicationHistory = (userID: string) => {
+const useGetMedicationHistory = (userID: number) => {
   return useQuery<IGetMedicationHistoryResponse, Error>(
     [ReactQueryKeys.GET_MEDICATION_HISTORY, userID],
     () => getMedicationHistory(userID)

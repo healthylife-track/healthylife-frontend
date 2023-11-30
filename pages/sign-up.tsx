@@ -62,7 +62,7 @@ const SignUp: NextPageWithLayout = () => {
 
     userSignUp(payload, {
       onSuccess: () => {
-        router.push(routes.dashboard());
+        router.push(routes.login());
         reset();
       },
     });

@@ -52,7 +52,7 @@ const Login: NextPageWithLayout = () => {
     };
     userLogin(payload, {
       onSuccess: async () => {
-        router.push(routes.dashboard());
+        router.replace(routes.dashboard());
         reset();
       },
     });

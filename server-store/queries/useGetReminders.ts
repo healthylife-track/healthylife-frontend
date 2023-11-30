@@ -5,13 +5,13 @@ import { api } from '../utils';
 interface IGetRemindersResponse {
   reminders: [];
 }
-const getReminders = async (userID: string): Promise<IGetRemindersResponse> => {
-  const response = await api.get(`/reminder/${userID}/`);
+const getReminders = async (userID: number): Promise<IGetRemindersResponse> => {
+  const response = await api.get(`/reminders/${userID}/`);
 
   return response.data;
 };
 
-const useGetReminders = (userID: string) => {
+const useGetReminders = (userID: number) => {
   return useQuery<IGetRemindersResponse, Error>(
     [ReactQueryKeys.GET_REMINDERS, userID],
     () => getReminders(userID)
